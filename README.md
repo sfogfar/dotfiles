@@ -32,6 +32,7 @@ Suggested sequence:
 2. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
 3. `ln -s ~/dotfiles/nvim ~/.config/nvim`
 4. `:PlugInstall`
+5. `ln -s ~/dotfiles/aliases ~/.bash_aliases`
 
 #### Kitty
 
