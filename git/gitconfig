@@ -1,0 +1,25 @@
+[init]
+	defaultBranch = main
+[user]
+	email = 003.sjc@gmail.com
+	name = Sam Cooper
+[core]
+	editor = nvim
+	excludesFile = /Users/samcooper/.gitignore_global
+[fetch]
+	prune = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[diff]
+    tool = kitty
+    guitool = kitty.gui
+[difftool]
+    prompt = false
+    trustExitCode = true
+[difftool "kitty"]
+    cmd = kitty +kitten diff $LOCAL $REMOTE
+[difftool "kitty.gui"]
+    cmd = kitty kitty +kitten diff $LOCAL $REMOTE
