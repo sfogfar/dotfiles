@@ -7,7 +7,6 @@
 TODOs:
 
 - simplify nvim config
-- browser
 
 Suggested sequence:
 
@@ -34,15 +33,25 @@ Suggested sequence:
 2. `ln -s ~/dotfiles/kitty ~/.config/kitty`
 
 #### Fish
+
 1. Install [Fish](https://fishshell.com/).
 2. Install [Starship](https://starship.rs/).
 3. `ln -s ~/dotfiles/fish ~/.config/fish`
 
 #### Command line comforts
-- Install [fzf](https://github.com/junegunn/fzf#using-git).
-- Install [fd](https://github.com/sharkdp/fd#on-ubuntu).
-- Install [bat](https://github.com/sharkdp/bat#on-ubuntu-using-apt).
-- Install [Fisher](https://github.com/jorgebucaran/fisher#installation).
+
+##### fzf
+
+1. Install [fzf](https://github.com/junegunn/fzf#using-git).
+2. Install [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
+
+##### ripgrep
+
+1. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
+
+##### tree
+
+1. `sudo apt install tree`
 
 #### LibreWolf
 
@@ -57,4 +66,3 @@ Install [JetBrains mono](https://www.jetbrains.com/lp/mono/#how-to-install).
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Turn on sync.
-
