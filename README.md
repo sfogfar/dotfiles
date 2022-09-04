@@ -38,6 +38,17 @@ Suggested sequence:
 2. Install [Starship](https://starship.rs/).
 3. `ln -s ~/dotfiles/fish ~/.config/fish`
 
+#### Command line comforts
+- Install [fzf](https://github.com/junegunn/fzf#using-git).
+- Install [fd](https://github.com/sharkdp/fd#on-ubuntu).
+- Install [bat](https://github.com/sharkdp/bat#on-ubuntu-using-apt).
+- Install [Fisher](https://github.com/jorgebucaran/fisher#installation).
+
+#### LibreWolf
+
+1. Install [LibreWolf](https://librewolf.net/).
+2. Install [Bitwarden](https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/).
+
 #### Font
 
 Install [JetBrains mono](https://www.jetbrains.com/lp/mono/#how-to-install).
@@ -46,3 +57,4 @@ Install [JetBrains mono](https://www.jetbrains.com/lp/mono/#how-to-install).
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Turn on sync.
+
