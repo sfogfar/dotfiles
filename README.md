@@ -32,12 +32,16 @@ Suggested sequence:
 2. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
 3. `ln -s ~/dotfiles/nvim ~/.config/nvim`
 4. `:PlugInstall`
-5. `ln -s ~/dotfiles/aliases ~/.bash_aliases`
 
 #### Kitty
 
 1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) & add to desktop.
 2. `ln -s ~/dotfiles/kitty ~/.config/kitty`
+
+#### Fish
+1. Install [Fish](https://fishshell.com/).
+2. Install [Starship](https://starship.rs/).
+3. `ln -s ~/dotfiles/fish ~/.config/fish`
 
 #### Font
 
