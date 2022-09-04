@@ -6,12 +6,7 @@
 
 TODOs:
 
-- nvim
 - simplify nvim config
-- zsh / fish
-- vim terminal commands
-- prompt
-- git
 - browser
 
 Suggested sequence:
