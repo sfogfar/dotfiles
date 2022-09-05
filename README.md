@@ -6,6 +6,7 @@
 
 TODOs:
 
+- fish vi mode
 - simplify nvim config
 
 Suggested sequence:
@@ -57,6 +58,7 @@ Suggested sequence:
 
 1. Install [LibreWolf](https://librewolf.net/).
 2. Install [Bitwarden](https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/).
+3. Update default browser (under _preferred applications_ in Mint).
 
 #### Font
 
