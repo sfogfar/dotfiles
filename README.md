@@ -1,25 +1,27 @@
 # dotfiles-revisited
 
-## Setting up a system from scratch
+My version controlled dotfiles.
 
-### Linux
+## Note on approach
+It is preferable to keep this repo simple, with portable dotfiles that can easily be cloned and used to configure essential tooling on any machine, than to have this be heavily automated but temperamental.
 
-**Note on approach:**
-Generally this repo should only contain files that are:
+As such, this repo will ideally contain only files that are:
 1. Manually written (i.e.: not the consequence of installing some plugin).
 2. Fairly universal.
 
-These files should be symlinked directly where they are needed to take effect. In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
+These files should be symlinked to where they are needed to take effect. In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
 
-TODOs:
+It may sometimes be more appropriate to make notes here on how to configure something, than to try and store the config itself. For example, VSCode extensions and settings.json are more easily managed by syncing than by using this repo.
 
-- fish vi mode
-- simplify nvim config
+## TODOs:
 
-Suggested sequence:
+- Rewrite nvim init with Lua.
+- Try using lsp directly in nvim, rather than via plugin.
+- Make portable, or start mac-os branch.
 
-1. Get git and connect to GitHub.
-2. Clone this repo.
+## Setting up a system from scratch
+
+### Linux
 
 #### Git
 
@@ -44,7 +46,8 @@ Suggested sequence:
 
 1. Install [Fish](https://fishshell.com/).
 2. Install [Starship](https://starship.rs/).
-3. `ln -s ~/dotfiles/fish ~/.config/fish`
+3. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
+4. `ln -s ~/dotfiles/fish/functions ~/.config/fish/functions`
 
 #### Command line comforts
 
@@ -61,11 +64,17 @@ Suggested sequence:
 
 1. `sudo apt install tree`
 
-#### LibreWolf
+#### Browser
 
+##### LibreWolf
+For general browsing with excellent privacy.
 1. Install [LibreWolf](https://librewolf.net/).
 2. Install [Bitwarden](https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/).
 3. Update default browser (under _preferred applications_ in Mint).
+
+##### Brave
+For the sites that only work properly on Chrome.
+1. Install [Brave](https://brave.com/download/).
 
 #### Font
 
