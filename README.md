@@ -4,6 +4,13 @@
 
 ### Linux
 
+**Note on approach:**
+Generally this repo should only contain files that are:
+1. Manually written (i.e.: not the consequence of installing some plugin).
+2. Fairly universal.
+
+These files should be symlinked directly where they are needed to take effect. In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
+
 TODOs:
 
 - fish vi mode
