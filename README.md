@@ -3,9 +3,11 @@
 My version controlled dotfiles.
 
 ## Note on approach
+
 It is preferable to keep this repo simple, with portable dotfiles that can easily be cloned and used to configure essential tooling on any machine, than to have this be heavily automated but temperamental.
 
 As such, this repo will ideally contain only files that are:
+
 1. Manually written (i.e.: not the consequence of installing some plugin).
 2. Fairly universal.
 
@@ -67,13 +69,17 @@ It may sometimes be more appropriate to make notes here on how to configure some
 #### Browser
 
 ##### LibreWolf
+
 For general browsing with excellent privacy.
+
 1. Install [LibreWolf](https://librewolf.net/).
 2. Install [Bitwarden](https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/).
 3. Update default browser (under _preferred applications_ in Mint).
 
 ##### Brave
+
 For the sites that only work properly on Chrome.
+
 1. Install [Brave](https://brave.com/download/).
 
 #### Font
