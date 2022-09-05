@@ -1,18 +1,22 @@
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [user]
-	email = 003.sjc@gmail.com
-	name = Sam Cooper
+    email = 003.sjc@gmail.com
+    name = Sam Cooper
 [core]
-	editor = nvim
-	excludesFile = /Users/samcooper/.gitignore_global
+    editor = nvim
+    excludesFile = /Users/samcooper/.gitignore_global
 [fetch]
-	prune = true
+    prune = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[log]
+    date = relative
+[format]
+    pretty = format:%C(yellow)%h %Cblue%>(12)%ad %Cgreen%<(7)%aN%Cred%d %Creset%s   
 [diff]
     tool = kitty
     guitool = kitty.gui
