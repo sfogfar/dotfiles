@@ -1,11 +1,13 @@
-[init]
-    defaultBranch = main
 [user]
     email = 003.sjc@gmail.com
     name = Sam Cooper
 [core]
     editor = nvim
     excludesFile = /Users/samcooper/.gitignore_global
+[init]
+    defaultBranch = main
+[status]
+    short = true
 [fetch]
     prune = true
 [filter "lfs"]
@@ -46,3 +48,4 @@
     st = stash
     stl = stash list
     stp = stash pop
+    delete-local-merged = "!git fetch && git branch --merged | egrep -v 'master' | xargs git branch -d"
