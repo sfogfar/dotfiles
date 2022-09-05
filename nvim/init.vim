@@ -12,6 +12,8 @@ set noswapfile
 " nvim invalid
 " set noesckeys " single esc key immediately works in insert mode
 
+inoremap kj <Esc>
+
 " }}}
 
 " vim-plug {{{
