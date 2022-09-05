@@ -1,0 +1,27 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "typescript",
+    "json",
+    "yml",
+    "markdown",
+    "haskell",
+    "lhaskell",
+    "css"
+  ],
+  "eslint.autoFixOnSave": true,
+  "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": ["--lsp"],
+      "rootPatterns": [
+        "*.cabal",
+        "stack.yaml",
+        "cabal.project",
+        "package.yaml",
+        "hie.yaml"
+      ],
+      "filetypes": ["hs", "lhs", "haskell", "lhaskell"]
+    }
+  }
+}

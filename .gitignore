@@ -1,0 +1,11 @@
+# nvim plugins
+nvim/plugged/*
+
+# installed fish functions
+fish/functions/_*
+fish/functions/fish_*
+fish/functions/fisher*
+fish/functions/fzf*
+fish/completions/*
+fish/conf.d/*
+fish/fish_plugins
