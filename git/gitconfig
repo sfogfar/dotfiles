@@ -41,6 +41,8 @@
     l = pull
     a = add
     A = add -A
+    rs = restore
+    rss = restore --staged
     c = commit -m
     cam = commit -a -m
     ca = commit --amend

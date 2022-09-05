@@ -36,8 +36,9 @@ It may sometimes be more appropriate to make notes here on how to configure some
 
 1. Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
 2. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
-3. `ln -s ~/dotfiles/nvim ~/.config/nvim`
-4. `:PlugInstall`
+3. `ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim`
+4. `ln -s ~/dotfiles/nvim/coc-settings.json ~/.config/nvim/coc-settings.json`
+5. `:PlugInstall`
 
 #### Kitty
 
@@ -50,6 +51,8 @@ It may sometimes be more appropriate to make notes here on how to configure some
 2. Install [Starship](https://starship.rs/).
 3. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
 4. `ln -s ~/dotfiles/fish/functions ~/.config/fish/functions`
+5. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
+6. `fish_config` to set the theme.
 
 #### Command line comforts
 
