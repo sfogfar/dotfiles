@@ -191,11 +191,11 @@ set cmdheight=2
 set updatetime=300
 
 " Use <cr> to confirm completion
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
 
 " Use tab to scroll autocomplete
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> coc#pum#visible() ? "coc#pum#next(1)" : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? "coc#pum#prev(1)" : "\<S-Tab>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -230,19 +230,6 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 
-" }}}
-
-" nerd tree {{{
-
-" start NERDTree when vim is started without file arguments
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-" Exit Vim if NERDTree is the only window left.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-" \ quit | endif
-
-" nnoremap <C-t> :NERDTreeToggle<CR>
 " }}}
 
 " }}}
