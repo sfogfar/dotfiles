@@ -21,13 +21,13 @@ inoremap kj <Esc>
 call plug#begin('~/.config/nvim/plugged')
 
 if !exists('g:vscode')
-    Plug '/usr/local/opt/fzf'
-
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'raimondi/delimitmate'
     Plug 'tpope/vim-fugitive'
+    Plug '/usr/local/opt/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'itchyny/lightline.vim'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 
     Plug 'pangloss/vim-javascript', { 'if': 'javascript' }
     Plug 'leafgarland/typescript-vim', { 'if': 'typescript' }
@@ -35,7 +35,8 @@ if !exists('g:vscode')
     Plug 'ignatov/kotlin-vim', { 'if': 'kotlin' }
     Plug 'neovimhaskell/haskell-vim', { 'if': 'haskell' }
     Plug 'jparise/vim-graphql', { 'if': 'graphql' }
-    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'javascript' }
+    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'javascriptreact' }
+    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'typescriptreact' }
 
     call plug#end()
 else
@@ -104,6 +105,26 @@ endif
 " }}}
 
 " appearance {{{
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+" Must have run PlugInstall before setting colour schemes
+let g:dracula_italic = 1
+colorscheme dracula
 
 set shortmess+=i " disable vim startup message
 set number " show line numbers
@@ -191,11 +212,11 @@ set cmdheight=2
 set updatetime=300
 
 " Use <cr> to confirm completion
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
 
 " Use tab to scroll autocomplete
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -230,19 +251,6 @@ nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 
-" }}}
-
-" nerd tree {{{
-
-" start NERDTree when vim is started without file arguments
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
-
-" Exit Vim if NERDTree is the only window left.
-" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-" \ quit | endif
-
-" nnoremap <C-t> :NERDTreeToggle<CR>
 " }}}
 
 " }}}
