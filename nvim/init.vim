@@ -122,9 +122,12 @@ if (empty($TMUX))
   endif
 endif
 
-" Must have run PlugInstall before setting colour schemes
+" enable italics
 let g:dracula_italic = 1
-colorscheme dracula
+
+" Must have run PlugInstall before setting colour schemes
+" autocmd ... ensures other plugins load OK first
+autocmd vimenter * ++nested colorscheme dracula
 
 set shortmess+=i " disable vim startup message
 set number " show line numbers
