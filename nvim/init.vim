@@ -21,13 +21,13 @@ inoremap kj <Esc>
 call plug#begin('~/.config/nvim/plugged')
 
 if !exists('g:vscode')
-    Plug '/usr/local/opt/fzf'
-
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'raimondi/delimitmate'
     Plug 'tpope/vim-fugitive'
+    Plug '/usr/local/opt/fzf'
     Plug 'junegunn/fzf.vim'
     Plug 'itchyny/lightline.vim'
+    Plug 'dracula/vim', { 'as': 'dracula' }
 
     Plug 'pangloss/vim-javascript', { 'if': 'javascript' }
     Plug 'leafgarland/typescript-vim', { 'if': 'typescript' }
@@ -35,7 +35,8 @@ if !exists('g:vscode')
     Plug 'ignatov/kotlin-vim', { 'if': 'kotlin' }
     Plug 'neovimhaskell/haskell-vim', { 'if': 'haskell' }
     Plug 'jparise/vim-graphql', { 'if': 'graphql' }
-    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'javascript' }
+    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'javascriptreact' }
+    Plug 'maxmellon/vim-jsx-pretty', { 'if': 'typescriptreact' }
 
     call plug#end()
 else
@@ -104,6 +105,9 @@ endif
 " }}}
 
 " appearance {{{
+
+" Must have run PlugInstall before using colorscheme
+colorscheme dracula
 
 set shortmess+=i " disable vim startup message
 set number " show line numbers
@@ -194,8 +198,8 @@ set updatetime=300
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
 
 " Use tab to scroll autocomplete
-inoremap <expr> <Tab> coc#pum#visible() ? "coc#pum#next(1)" : "\<Tab>"
-inoremap <expr> <S-Tab> coc#pum#visible() ? "coc#pum#prev(1)" : "\<S-Tab>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
