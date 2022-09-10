@@ -1,4 +1,4 @@
 # Setting up NeoVim
 
 ## Installation
-Final step: `:checkhealth`
+Final step: `nvim +checkhealth`, making sure to check python and node providers.
