@@ -2,3 +2,6 @@ add_newline = false
 
 [package]
 disabled = true
+
+[gcloud]
+disabled = true
