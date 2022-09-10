@@ -1,5 +1,6 @@
 # nvim plugins
 nvim/plugged/*
+old-nvim/plugged/*
 
 # installed fish functions
 fish/functions/_*

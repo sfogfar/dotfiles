@@ -139,6 +139,7 @@ set scrolloff=5 " show lines above and below cursor when possible
 :command H set invcursorline
 
 " remove filler in vertical split divider
+" PORT TODO
 :set fillchars+=vert:\ 
 
 " fix bad background colour on floating windows
@@ -178,6 +179,7 @@ set mouse+=a " enable mouse support
 " nvim default
 " set backspace=indent,eol,start " allow backspace over anything
 
+" PORT TODO
 " line numbering tied to modes
 :augroup numbertoggle
 :  autocmd!
