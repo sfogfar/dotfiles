@@ -12,7 +12,7 @@ if not packer_status_ok then
   return
 end
 
-return packer.startup({function(use)
+return packer.startup({function()
   use "wbthomason/packer.nvim"
 
   -- colorscheme
@@ -38,13 +38,10 @@ return packer.startup({function(use)
     "neovim/nvim-lspconfig",
   }
 
-  --[[
-  fairly sure popup is deprecated, plenary is unneeded
-  wait and see, plenary may be a dependency of telescope...
-
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  --]]
+  -- comfort features
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.0', requires = { {'nvim-lua/plenary.nvim'} }
+  }
   
 end,
 config = {
