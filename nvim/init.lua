@@ -7,3 +7,4 @@ vim.cmd [[
 
 require "sam.options"
 require "sam.keymaps"
+require "sam.commands"

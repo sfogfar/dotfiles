@@ -1,8 +1,6 @@
 -- https://neovim.io/doc/user/options.html
 
 -- appearance
-vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.showtabline = 2
 vim.opt.showmatch = true
 vim.opt.wrap = false
@@ -14,6 +12,16 @@ vim.opt.numberwidth = 2                -- TODO: review preference
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = false          -- TODO: enable
 
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.cmd [[
+  :augroup numbertoggle
+  :  autocmd!
+  :  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  :  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+  :augroup END
+]]
+
 -- indentation
 vim.opt.smartindent = true
 vim.opt.expandtab = true
@@ -22,17 +30,17 @@ vim.opt.tabstop = 2
 vim.opt.conceallevel = 0
 vim.opt.shortmess:append "a"           -- TODO: review preference
 
--- search
-vim.opt.hlsearch = true
-vim.opt.smartcase = true
-vim.opt.ignorecase = true
-
 -- navigation
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.iskeyword:append "-"           -- TODO: review preference
+
+-- search
+vim.opt.hlsearch = true
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
 
 -- system behaviours
 vim.opt.mouse = a                      -- TODO: review behaviour
