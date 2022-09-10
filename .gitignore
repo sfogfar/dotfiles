@@ -1,4 +1,5 @@
 # nvim plugins
+nvim/plugin
 nvim/plugged/*
 old-nvim/plugged/*
 
