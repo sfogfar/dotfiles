@@ -35,10 +35,11 @@ It may sometimes be more appropriate to make notes here on how to configure some
 #### Neovim
 
 1. Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
-2. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
-3. `ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim`
-4. `ln -s ~/dotfiles/nvim/coc-settings.json ~/.config/nvim/coc-settings.json`
-5. `:PlugInstall`
+2. Run `nvim +checkhealth`, making sure to check python and node providers.
+3. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
+4. `ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim`
+5. `ln -s ~/dotfiles/nvim/coc-settings.json ~/.config/nvim/coc-settings.json`
+6. `:PlugInstall`
 
 #### Kitty
 
