@@ -32,12 +32,11 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.whichwrap:append "<,>,[,]"     -- TODO: review preference
 vim.opt.iskeyword:append "-"           -- TODO: review preference
 
 -- system behaviours
-vim.opt.mouse = a
-vim.opt.clipboard = unnamedplus
+vim.opt.mouse = a                      -- TODO: review behaviour
+vim.opt.clipboard = "unnamedplus"
 vim.opt.fileencoding = "utf-8"
 vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 300

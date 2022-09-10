@@ -58,6 +58,8 @@ nnoremap <Leader>q :wqa<CR>
 nnoremap <Leader>o :on<CR>
 
 " copy and paste to system clipboard
+" TODO: check copy / paste performace and decide if needed
+" DONE: no longer needed
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>p "+p
@@ -68,6 +70,7 @@ vmap <Leader>P "+P
 nmap <Leader><Leader> V
 
 " leader key + fzf
+" TODO: bring across if needed with fzf
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 
@@ -158,6 +161,7 @@ set hlsearch " highlight search
 " use :C to clear search highlighting
 :command C let @/=""
 
+" TODO: replace usage of these with use of substitute command
 " replace in visual block
 vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 
