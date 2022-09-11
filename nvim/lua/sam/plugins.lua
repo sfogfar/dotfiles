@@ -27,12 +27,15 @@ return packer.startup({function()
     run = ":TSUpdate",
   }
 
-  -- comfort features
+  -- fuzzy finding
+  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
   use {
     "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { {"nvim-lua/plenary.nvim"} }
   }
+
+  -- close parens
   use {"raimondi/delimitmate"}
-  
+ 
 end,
 config = {
   display = {

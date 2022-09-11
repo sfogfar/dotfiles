@@ -354,6 +354,33 @@ treesitter_configs.setup({
 
 -- }}}
 
+-- telescope {{{
+
+--[[
+
+Official documentation: https://github.com/nvim-telescope/telescope.nvim#telescopenvim
+
+--]]
+
+require("telescope").load_extension('fzf')
+
+keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
+keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
+keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
+keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
+keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
+keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<CR>", opts)
+
+--[[
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+-]]
+
+-- }}}
+
 -- new section template {{{
 
 --[[
