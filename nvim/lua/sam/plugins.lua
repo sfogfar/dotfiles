@@ -18,25 +18,8 @@ return packer.startup({function()
   -- colorscheme
   use {'dracula/vim', as = 'dracula'}
 
-  -- completion
-  use {
-    "hrsh7th/nvim-cmp",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "saadparwaiz1/cmp_luasnip",
-    "L3MON4D3/LuaSnip",
-    "rafamadriz/friendly-snippets",
-  }
-
-  -- lsp
-  use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  }
+  -- syntax highlighting
+  use {"neoclide/coc.nvim", branch = "release"}
 
   -- syntax highlighting
   use {
