@@ -31,6 +31,7 @@ return packer.startup({function()
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
+    requires = { {"p00f/nvim-ts-rainbow"} }
   }
 
   -- fuzzy finding

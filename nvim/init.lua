@@ -350,6 +350,12 @@ treesitter_configs.setup({
     disable = {},
     additional_vim_regex_highlighting = false,
   },
+  rainbow = {
+    enable = true,
+    disable = {}, 
+    extended_mode = true,
+    max_file_lines = nil,
+  }
 })
 
 -- }}}
