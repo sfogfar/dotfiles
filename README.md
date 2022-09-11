@@ -11,11 +11,13 @@ As such, this repo will ideally contain only files that are:
 1. Manually written (i.e.: not the consequence of installing some plugin).
 2. Fairly universal.
 
-These files should be symlinked to where they are needed to take effect. In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
+These files should be symlinked to where they are needed to take effect.
+In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
 
-It may sometimes be more appropriate to make notes here on how to configure something, than to try and store the config itself. For example, VSCode extensions and settings.json are more easily managed by syncing than by using this repo.
+It may sometimes be more appropriate to make notes here on how to configure something, than to try and store the config itself.
+For example, VSCode extensions and settings.json are more easily managed by syncing than by using this repo.
 
-## TODOs:
+## TODOs
 
 - Rewrite nvim init with Lua.
 - Try using lsp directly in nvim, rather than via plugin.

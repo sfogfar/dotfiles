@@ -1,7 +1,5 @@
 -- vim:foldmethod=marker
 
--- TODO: add readme / usage guide here
-
 -- pre-requisites {{{
 
 --[[
@@ -34,10 +32,10 @@ vim.opt.showtabline = 2
 vim.opt.showmatch = true
 vim.opt.wrap = false
 vim.opt.showmode = false
-vim.opt.cursorline = false             -- TODO: review preference
+vim.opt.cursorline = false -- TODO: review preference
 vim.opt.cmdheight = 2
 vim.opt.pumheight = 10
-vim.opt.numberwidth = 2                -- TODO: review preference
+vim.opt.numberwidth = 2 -- TODO: review preference
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 
@@ -57,14 +55,14 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.conceallevel = 0
-vim.opt.shortmess:append "a"           -- TODO: review preference
+vim.opt.shortmess:append "a" -- TODO: review preference
 
 -- navigation
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.iskeyword:append "-"           -- TODO: review preference
+vim.opt.iskeyword:append "-" -- TODO: review preference
 vim.opt.completeopt = { "menuone", "noselect" }
 
 -- search
@@ -73,7 +71,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- system behaviours
-vim.opt.mouse = a                      -- TODO: review behaviour
+vim.opt.mouse = a -- TODO: review behaviour
 vim.opt.clipboard = "unnamedplus"
 vim.opt.fileencoding = "utf-8"
 vim.opt.timeoutlen = 1000
@@ -122,8 +120,8 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 -- resize with arrows
 keymap("n", "<C-Down>", ":resize -2<CR>", opts)
 keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)        -- TODO: Resolve conflict with MacOS workspace nav shortcut
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)       -- TODO: Resolve conflict with MacOS workspace nav shortcut
+keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts) -- TODO: Resolve conflict with MacOS workspace nav shortcut
+keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts) -- TODO: Resolve conflict with MacOS workspace nav shortcut
 
 -- navigate buffers
 keymap("n", "<left>", ":bnext<CR>", opts)
@@ -145,13 +143,13 @@ keymap("i", "kj", "<ESC>", opts)
 -- visual {{{
 
 -- stay in indent mode
-keymap("v", "<", "<gv", opts)                                   -- TODO: review behaviour
-keymap("v", ">", ">gv", opts)                                   -- TODO: review behaviour
+keymap("v", "<", "<gv", opts) -- TODO: review behaviour
+keymap("v", ">", ">gv", opts) -- TODO: review behaviour
 
 -- move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
--- keymap("v", "p", '"_dP', opts)                               -- TODO: review behaviour 
+-- keymap("v", "p", '"_dP', opts)                               -- TODO: review behaviour
 
 -- }}}
 
@@ -218,6 +216,22 @@ May revisit later.
 
 --]]
 
+-- extensions
+vim.cmd [[
+  " coc syntax extensions
+  let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-markdownlint', 'coc-sumneko-lua']
+
+  " conditionally use prettier & eslint
+  if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+    let g:coc_global_extensions += ['coc-prettier']
+  endif
+
+  if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+    let g:coc_global_extensions += ['coc-eslint']
+  endif
+]]
+
+-- keymaps
 vim.cmd [[
   " Use <cr> to confirm completion
   inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "<CR>"
@@ -313,7 +327,7 @@ Official documentation: https://github.com/nvim-treesitter/nvim-treesitter#nvim-
 local treesitter_status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
 if not treesitter_status_ok then
   vim.notify("Unable to load treesitter.")
-	return
+  return
 end
 
 treesitter_configs.setup({
@@ -351,4 +365,3 @@ Relevant notes: <foo is bar, bar is baz...>
 --]]
 
 -- }}}
-
