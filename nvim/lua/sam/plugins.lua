@@ -38,10 +38,17 @@ return packer.startup({function()
     "neovim/nvim-lspconfig",
   }
 
+  -- syntax highlighting
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  }
+
   -- comfort features
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0', requires = { {'nvim-lua/plenary.nvim'} }
+    "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { {"nvim-lua/plenary.nvim"} }
   }
+  use {"raimondi/delimitmate"}
   
 end,
 config = {

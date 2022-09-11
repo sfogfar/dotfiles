@@ -448,6 +448,44 @@ require('luasnip.loaders.from_vscode').lazy_load()
 
 -- }}}
 
+-- treesitter {{{
+
+--[[
+
+Official documentation: https://github.com/nvim-treesitter/nvim-treesitter#nvim-treesitter
+
+--]]
+
+local treesitter_status_ok, treesitter_configs = pcall(require, "nvim-treesitter.configs")
+if not treesitter_status_ok then
+  vim.notify("Unable to load treesitter.")
+	return
+end
+
+treesitter_configs.setup({
+  ensure_installed = {
+    "css",
+    "fish",
+    "haskell",
+    "html",
+    "javascript",
+    "json",
+    "lua",
+    "tsx",
+    "typescript"
+  },
+  sync_install = false,
+  auto_install = true,
+  ignore_install = {},
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+})
+
+-- }}}
+
 -- new section template {{{
 
 --[[
