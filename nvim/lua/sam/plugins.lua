@@ -18,6 +18,12 @@ return packer.startup({function()
   -- colorscheme
   use {'dracula/vim', as = 'dracula'}
 
+  -- statusline
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
   -- syntax highlighting
   use {"neoclide/coc.nvim", branch = "release"}
 

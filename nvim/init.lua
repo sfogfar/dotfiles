@@ -381,6 +381,20 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 -- }}}
 
+-- lualine {{{
+
+--[[
+
+Official documentation: https://github.com/nvim-lualine/lualine.nvim#lualinenvim
+
+--]]
+require('lualine').setup {
+  options = { theme = require("lualine.themes.dracula") },
+  ...
+}
+
+-- }}}
+
 -- new section template {{{
 
 --[[
