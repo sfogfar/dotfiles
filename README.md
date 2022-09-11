@@ -39,7 +39,9 @@ For example, VSCode extensions and settings.json are more easily managed by sync
 1. Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
 2. Run `nvim +checkhealth`, making sure to check python and node providers.
 3. Install [packer](https://github.com/wbthomason/packer.nvim#quickstart).
-4. `ln -s ~/dotfiles/nvim/init.lua ~/.config/nvim/init.lua`
+4. `ln -s ~/dotfiles/nvim/ ~/.config/nvim/`
+
+_Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint by running `sudo apt install g++`.
 
 #### Kitty
 
