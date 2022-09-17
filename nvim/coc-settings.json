@@ -25,5 +25,6 @@
       ],
       "filetypes": ["hs", "lhs", "haskell", "lhaskell"]
     }
-  }
+  },
+  "Lua.telemetry.enable": false
 }

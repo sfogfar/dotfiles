@@ -11,11 +11,13 @@ As such, this repo will ideally contain only files that are:
 1. Manually written (i.e.: not the consequence of installing some plugin).
 2. Fairly universal.
 
-These files should be symlinked to where they are needed to take effect. In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
+These files should be symlinked to where they are needed to take effect.
+In most cases it is not necessary to symlink the entire contents of `.config` or even sub-directories of it and I will prefer to only link the subsets of that directory that I have interacted with most manually.
 
-It may sometimes be more appropriate to make notes here on how to configure something, than to try and store the config itself. For example, VSCode extensions and settings.json are more easily managed by syncing than by using this repo.
+It may sometimes be more appropriate to make notes here on how to configure something, than to try and store the config itself.
+For example, VSCode extensions and settings.json are more easily managed by syncing than by using this repo.
 
-## TODOs:
+## TODOs
 
 - Rewrite nvim init with Lua.
 - Try using lsp directly in nvim, rather than via plugin.
@@ -35,10 +37,11 @@ It may sometimes be more appropriate to make notes here on how to configure some
 #### Neovim
 
 1. Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
-2. Install [vim plug](https://github.com/junegunn/vim-plug#unix-linux).
-3. `ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim`
-4. `ln -s ~/dotfiles/nvim/coc-settings.json ~/.config/nvim/coc-settings.json`
-5. `:PlugInstall`
+2. Run `nvim +checkhealth`, making sure to check python and node providers.
+3. Install [packer](https://github.com/wbthomason/packer.nvim#quickstart).
+4. `ln -s ~/dotfiles/nvim/ ~/.config/nvim/`
+
+_Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint by running `sudo apt install g++`.
 
 #### Kitty
 
