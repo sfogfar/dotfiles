@@ -60,10 +60,10 @@ bindsym $mod+d exec rofi -show run
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -72,10 +72,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -84,7 +84,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -111,15 +111,15 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "01. Kitty "
-set $ws2 "02. LibreWolf "
-set $ws3 "03. Spotify "
-set $ws4 "04. VSCode "
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
+set $ws1 "01 | "
+set $ws2 "02 | "
+set $ws3 "03 | "
+set $ws4 "04 | "
+set $ws5 "05 | "
+set $ws6 "06"
+set $ws7 "07"
+set $ws8 "08"
+set $ws9 "09"
 set $ws10 "10"
 
 # switch to workspace
@@ -193,6 +193,7 @@ client.background       #F8F8F2
 # finds out, if available)
 bar {
         status_command i3status
+        position top
         colors {
           background #282A36
           statusline #F8F8F2
@@ -207,7 +208,7 @@ bar {
 }
 
 # Custom lock binding
-bindsym $mod+shift+x exec i3lock
+bindsym $mod+shift+x exec "~/dotfiles/i3/lock.sh"
 
 # Wallpaper
 exec_always feh --bg-scale ~/Pictures/wallpaper-exploded-x220-dark.png
@@ -215,6 +216,7 @@ exec_always feh --bg-scale ~/Pictures/wallpaper-exploded-x220-dark.png
 # Workspace assignments
 assign [class=kitty] $ws1
 assign [class=librewolf-default] $ws2
+assign [class=obsidian] $ws3
 # Special case, see https://github.com/i3/i3/issues/2060
-for_window [class="Spotify"] move to workspace $ws3
-assign [class=Code] $ws4
+for_window [class="Spotify"] move to workspace $ws4
+assign [class=Code] $ws5
