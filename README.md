@@ -1,4 +1,4 @@
-# dotfiles-revisited
+# dotfiles
 
 My version controlled dotfiles.
 
