@@ -35,7 +35,7 @@ require("lazy").setup({
   },
 
   -- help with keybinds
-  { "folke/which-key.nvim", opts = {} },
+  { "folke/which-key.nvim",      opts = {} },
 
   -- colorscheme
   {
@@ -90,6 +90,9 @@ require("lazy").setup({
     build = ":TSUpdate",
   },
 
+  -- formatting
+  { "mhartington/formatter.nvim" },
+
   -- close parens
   {
     "windwp/nvim-autopairs",
@@ -97,42 +100,37 @@ require("lazy").setup({
     opts = {}
   },
 
-  -- "gc" to comment visual regions/lines
-  { "numToStr/Comment.nvim", opts = {} },
+  -- commenting
+  { "numToStr/Comment.nvim", opts = {} }, -- "gc" to comment visual regions/lines
 
   -- language specific support
   {
     "Olical/conjure",
     ft = { "clojure", "fennel", "python" },
     dependencies = {
-        {
-            "PaterJason/cmp-conjure",
-            config = function()
-                local cmp = require("cmp")
-                local config = cmp.get_config()
-                table.insert(config.sources, {
-                    name = "buffer",
-                    option = {
-                        sources = {
-                            { name = "conjure" },
-                        },
-                    },
-                })
-                cmp.setup(config)
-            end,
-        },
+      {
+        "PaterJason/cmp-conjure",
+        config = function()
+          local cmp = require("cmp")
+          local config = cmp.get_config()
+          table.insert(config.sources, {
+            name = "buffer",
+            option = {
+              sources = {
+                { name = "conjure" },
+              },
+            },
+          })
+          cmp.setup(config)
+        end,
+      },
     },
     config = function(_, _)
-        require("conjure.main").main()
-        require("conjure.mapping")["on-filetype"]()
+      require("conjure.main").main()
+      require("conjure.mapping")["on-filetype"]()
     end,
     init = function()
-        vim.g["conjure#debug"] = false
+      vim.g["conjure#debug"] = false
     end,
   },
-  {
-    'prettier/vim-prettier',
-    run = 'yarn install --frozen-lockfile --production',
-    ft = {'javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'}
-  }
 }, {})

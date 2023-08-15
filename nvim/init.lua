@@ -92,12 +92,11 @@ Modes key:
   n -> normal
   i -> insert
   v -> visual
-  x -> visual
+  x -> visual block
 
 --]]
 
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -235,14 +234,13 @@ local on_attach = function(_, bufnr)
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-    vim.lsp.buf.format()
-  end, { desc = "Format current buffer with LSP" })
+  -- format
+  nmap("<leader>fmt", vim.lsp.buf.format, "[F]or[m]a[t]")
+
 end
 
 local servers = {
   tsserver = {},
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -384,20 +382,12 @@ require("telescope").load_extension("fzf")
 keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').git_files()<CR>", opts)
 keymap("n", "<leader>faf", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
-keymap("n", "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts) -- find current word
+keymap("n", "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts)
 keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
 keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts) -- TODO: try having this as a dropdown instead
 keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<CR>", opts)
-
---[[
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--]]
 
 -- }}}
 
