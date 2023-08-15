@@ -1,69 +1,133 @@
--- run PackerSync any time this file is updated
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]]
-
-local packer_status_ok, packer = pcall(require, "packer")
-if not packer_status_ok then
-  vim.notify("Unable to load packer.")
-  return
+-- Install package manager
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable',
+    lazypath,
+  }
 end
+vim.opt.rtp:prepend(lazypath)
 
-return packer.startup({function()
-  use "wbthomason/packer.nvim"
+require('lazy').setup({
+  -- lsp
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      { 'williamboman/mason.nvim', config = true },
+      'williamboman/mason-lspconfig.nvim',
+      'folke/neodev.nvim',
+    },
+  },
 
   -- completion
-  use {
-  'VonHeikemen/lsp-zero.nvim',
-  branch = 'v2.x',
-  requires = {
-    -- LSP Support
-    {'neovim/nvim-lspconfig'},             -- Required
-    {'williamboman/mason.nvim'},           -- Optional
-    {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-    -- Autocompletion
-    {'hrsh7th/nvim-cmp'},     -- Required
-    {'hrsh7th/cmp-nvim-lsp'}, -- Required
-    {'L3MON4D3/LuaSnip'},     -- Required
-  }
-}
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-nvim-lsp',
+      'rafamadriz/friendly-snippets',
+    },
+  },
+  
+  -- help with keybinds
+  { 'folke/which-key.nvim', opts = {} },
 
   -- colorscheme
-  use {'dracula/vim', as = 'dracula'}
+  {
+    'Mofiqul/dracula.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme dracula]])
+    end,
+  },
 
   -- statusline
-  use {
+  {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-  }
-
-  -- syntax highlighting
-  use {
-    "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate",
-    requires = { {"p00f/nvim-ts-rainbow"} }
-  }
+    opts = {
+      options = {
+        icons_enabled = false,
+        theme = 'dracula',
+        component_separators = '|',
+        section_separators = '',
+      },
+    },
+  },
 
   -- fuzzy finding
-  use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-  use {
-    "nvim-telescope/telescope.nvim", tag = "0.1.0", requires = { {"nvim-lua/plenary.nvim"} }
-  }
+  {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+      -- Only load if `make` is available. Make sure you have the system
+      -- requirements installed.
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+    },
+  },
+
+  -- syntax highlighting
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    build = ':TSUpdate',
+  },  
 
   -- close parens
-  use {"raimondi/delimitmate"}
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {}
+  },
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- language specific support
-  use "Olical/conjure"
- 
-end,
-config = {
-  display = {
-    open_fn = require("packer.util").float,
-  },
-}})
-
+  {
+    "Olical/conjure",
+    ft = { "clojure", "fennel", "python" },
+    dependencies = {
+        {
+            "PaterJason/cmp-conjure",
+            config = function()
+                local cmp = require("cmp")
+                local config = cmp.get_config()
+                table.insert(config.sources, {
+                    name = "buffer",
+                    option = {
+                        sources = {
+                            { name = "conjure" },
+                        },
+                    },
+                })
+                cmp.setup(config)
+            end,
+        },
+    },
+    config = function(_, opts)
+        require("conjure.main").main()
+        require("conjure.mapping")["on-filetype"]()
+    end,
+    init = function()
+        vim.g["conjure#debug"] = true
+    end,
+  }
+}, {})
