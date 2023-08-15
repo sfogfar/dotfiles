@@ -194,13 +194,8 @@ require "sam.plugins"
 
 -- colorscheme {{{
 
-local colorscheme = "dracula"
-local colorscheme_status_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-if not colorscheme_status_ok then
-  vim.notify("Unable to load " .. colorscheme .. " colorscheme.")
-  return
-end
-
+vim.cmd[[colorscheme tokyonight-storm]]
+-- vim.cmd[[colorscheme tokyonight-day]]
 
 -- }}}
 

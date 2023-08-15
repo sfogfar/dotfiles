@@ -35,16 +35,14 @@ require("lazy").setup({
   },
 
   -- help with keybinds
-  { "folke/which-key.nvim",      opts = {} },
+  { "folke/which-key.nvim", opts = {} },
 
   -- colorscheme
   {
-    "Mofiqul/dracula.nvim",
+    "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    config = function()
-      vim.cmd([[colorscheme dracula]])
-    end,
+    opts = {}
   },
 
   -- statusline
@@ -53,7 +51,7 @@ require("lazy").setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = "dracula",
+        theme = "tokyonight",
         component_separators = "|",
         section_separators = "",
       },
