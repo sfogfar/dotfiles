@@ -15,6 +15,23 @@ end
 return packer.startup({function()
   use "wbthomason/packer.nvim"
 
+  -- completion
+  use {
+  'VonHeikemen/lsp-zero.nvim',
+  branch = 'v2.x',
+  requires = {
+    -- LSP Support
+    {'neovim/nvim-lspconfig'},             -- Required
+    {'williamboman/mason.nvim'},           -- Optional
+    {'williamboman/mason-lspconfig.nvim'}, -- Optional
+
+    -- Autocompletion
+    {'hrsh7th/nvim-cmp'},     -- Required
+    {'hrsh7th/cmp-nvim-lsp'}, -- Required
+    {'L3MON4D3/LuaSnip'},     -- Required
+  }
+}
+
   -- colorscheme
   use {'dracula/vim', as = 'dracula'}
 
@@ -25,8 +42,6 @@ return packer.startup({function()
   }
 
   -- syntax highlighting
-  use {"neoclide/coc.nvim", branch = "release"}
-
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",

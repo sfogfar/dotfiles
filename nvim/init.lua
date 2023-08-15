@@ -205,114 +205,26 @@ end
 
 -- }}}
 
--- coc {{{
+-- lsp {{{
 
 --[[
 
-Official documentation: https://github.com/neoclide/coc.nvim#readme
-
-Continuing with coc for now because configuring lsp + completion + formatting was a rabbit hole.
-May revisit later.
+(un)Official documentation: https://github.com/VonHeikemen/lsp-zero.nvim
 
 --]]
 
--- extensions
-vim.cmd [[
-  " coc syntax extensions
-  let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-markdownlint', 'coc-sumneko-lua']
+local lsp = require('lsp-zero').preset({})
 
-  " conditionally use prettier & eslint
-  if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-    let g:coc_global_extensions += ['coc-prettier']
-  endif
+lsp.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp.default_keymaps({buffer = bufnr})
+end)
 
-  if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-    let g:coc_global_extensions += ['coc-eslint']
-  endif
-]]
+-- (Optional) Configure lua language server for neovim
+require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
--- keymaps
-vim.cmd [[
-  " Use <cr> to confirm completion
-  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "<CR>"
-
-  " Use tab to scroll autocomplete
-  inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-  inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
-
-  " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
-
-  " Use `[g` and `]g` to navigate diagnostics
-  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-
-  " Use K to show documentation in preview window.
-   nnoremap <silent> K :call ShowDocumentation()<CR>
-
-  function! ShowDocumentation()
-    if CocAction('hasProvider', 'hover')
-      call CocActionAsync('doHover')
-    else
-      call feedkeys('K', 'in')
-    endif
-  endfunction
-
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
-
-  " Add `:Format` command to format current buffer.
-  command! -nargs=0 Format :call CocActionAsync('format')
-
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-  " Add `:OR` command for organize imports of the current buffer.
-  command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-  " Remap <C-f> and <C-b> for scroll float windows/popups.
-  if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  endif
-
-  " Mappings for CoCList
-  " Show all diagnostics.
-  nnoremap <silent><nowait> <Leader>a  :<C-u>CocList diagnostics<cr>
-  " Manage extensions.
-  nnoremap <silent><nowait> <Leader>e  :<C-u>CocList extensions<cr>
-  " Show commands.
-  nnoremap <silent><nowait> <Leader>c  :<C-u>CocList commands<cr>
-  " Find symbol of current document.
-  nnoremap <silent><nowait> <Leader>o  :<C-u>CocList outline<cr>
-  " Search workspace symbols.
-  nnoremap <silent><nowait> <Leader>s  :<C-u>CocList -I symbols<cr>
-  " Do default action for next item.
-  nnoremap <silent><nowait> <Leader>j  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent><nowait> <Leader>k  :<C-u>CocPrev<CR>
-  " Resume latest coc list.
-  nnoremap <silent><nowait> <Leader>p  :<C-u>CocListResume<CR>
-]]
-
+lsp.setup()
 
 -- }}}
 
