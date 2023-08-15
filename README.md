@@ -26,11 +26,15 @@ For example, VSCode extensions and settings.json are more easily managed by sync
 
 ## Setting up a system from scratch
 
-### Linux
+### Linux or MacOS
+
+#### [macOS] Homebrew
+
+1. Install [Homebrew](https://brew.sh/).
 
 #### Git
 
-1. `sudo apt install git`
+1. `sudo apt install git` || `brew install git`
 2. [Connect to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent).
 3. `ln -s ~/dotfiles/git/gitconfig ~/.gitconfig`
 4. `ln -s ~/dotfiles/git/gitignore_global ~/.gitignore_global`
@@ -46,32 +50,30 @@ _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 
 #### Kitty
 
-1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) & add to desktop.
+1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) 
+2. [Linux] Add to desktop.
 2. `ln -s ~/dotfiles/kitty ~/.config/kitty`
 
 #### Fish
 
 1. Install [Fish](https://fishshell.com/).
-2. Install [Starship](https://starship.rs/).
-3. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
-4. `ln -s ~/dotfiles/fish/functions ~/.config/fish/functions`
-5. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
-6. `fish_config` to set the theme.
+2. [macOS] `set -U fish_user_paths /usr/local/bin $fish_user_paths`
+3. Install [Starship](https://starship.rs/).
+4. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
+5. `ln -s ~/dotfiles/fish/functions ~/.config/fish/functions`
+6. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
+7. `fish_config` to set the theme.
 
 #### Command line comforts
 
-##### fzf
-
 1. Install [fzf](https://github.com/junegunn/fzf#using-git).
 2. Install [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
-
-##### ripgrep
-
-1. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
+3. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
+4. Install [fd](https://github.com/BurntSushi/ripgrep#installation).
 
 ##### tree
 
-1. `sudo apt install tree`
+1. `sudo apt install tree` || `brew install tree`
 
 #### Browser
 
@@ -97,3 +99,8 @@ Install [JetBrains mono](https://www.jetbrains.com/lp/mono/#how-to-install).
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Turn on sync.
+
+#### [MacOS] Navigation
+
+1. Install [Raycast](https://www.raycast.com/).
+2. Disable hotkey for Spotlight.

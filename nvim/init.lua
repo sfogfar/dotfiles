@@ -10,7 +10,7 @@ This section contains anything that should always be run before the main configu
 
 -- workaround for nvim being unable to find volta managed node packages
 vim.cmd [[
-  if executable('volta')
+  if executable("volta")
     let g:node_host_prog = trim(system("volta which neovim-node-host"))
   endif
 ]]
@@ -32,10 +32,10 @@ vim.opt.showtabline = 2
 vim.opt.showmatch = true
 vim.opt.wrap = false
 vim.opt.showmode = false
-vim.opt.cursorline = false -- TODO: review preference
+vim.opt.cursorline = false
 vim.opt.cmdheight = 2
 vim.opt.pumheight = 10
-vim.opt.numberwidth = 2 -- TODO: review preference
+vim.opt.numberwidth = 2
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 
@@ -55,14 +55,14 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.conceallevel = 0
-vim.opt.shortmess:append "a" -- TODO: review preference
+vim.opt.shortmess:append "a"
 
 -- navigation
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
-vim.opt.iskeyword:append "-" -- TODO: review preference
+vim.opt.iskeyword:append "-"
 vim.opt.completeopt = { "menuone", "noselect" }
 
 -- search
@@ -71,7 +71,7 @@ vim.opt.smartcase = true
 vim.opt.ignorecase = true
 
 -- system behaviours
-vim.opt.mouse = a -- TODO: review behaviour
+vim.opt.mouse = a
 vim.opt.clipboard = "unnamedplus"
 vim.opt.fileencoding = "utf-8"
 vim.opt.timeoutlen = 1000
@@ -79,7 +79,7 @@ vim.opt.updatetime = 300
 vim.opt.backup = false
 vim.opt.swapfile = false
 vim.opt.writebackup = false
-vim.opt.undofile = false
+vim.opt.undofile = true
 
 -- }}}
 
@@ -92,12 +92,11 @@ Modes key:
   n -> normal
   i -> insert
   v -> visual
-  x -> visual
+  x -> visual block
 
 --]]
 
 local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
 
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -107,21 +106,22 @@ vim.g.maplocalleader = " "
 -- normal {{{
 
 -- quick write and quit
-keymap("n", "<leader>w", ":wa<CR>", opts)
+keymap("n", "<leader>w", ":wa<CR>", opts) -- TODO: consider alternative commands
 keymap("n", "<leader>q", ":wqa<CR>", opts)
 
 -- better window navigation
-keymap("n", "<leader>o", ":on<CR>", opts)
+-- keymap("n", "<leader>o", ":on<CR>", opts) -- TODO: never use this, OK to remove?
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- resize with arrows
-keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts) -- TODO: Resolve conflict with MacOS workspace nav shortcut
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts) -- TODO: Resolve conflict with MacOS workspace nav shortcut
+-- TODO: resolve conflicts with MacOS workspace navigation
+-- keymap("n", "<C-Down>", ":resize -2<CR>", opts)
+-- keymap("n", "<C-Up>", ":resize +2<CR>", opts)
+-- keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+-- keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 
 -- navigate buffers
 keymap("n", "<left>", ":bnext<CR>", opts)
@@ -149,7 +149,6 @@ keymap("v", ">", ">gv", opts) -- TODO: review behaviour
 -- move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
--- keymap("v", "p", '"_dP', opts)                               -- TODO: review behaviour
 
 -- }}}
 
@@ -165,7 +164,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- commands {{{
 
---[[ 
+--[[
 
 Official documentation: https://neovim.io/doc/user/api.html#nvim_create_user_command()
 
@@ -174,7 +173,7 @@ Official documentation: https://neovim.io/doc/user/api.html#nvim_create_user_com
 local command = vim.api.nvim_create_user_command
 
 -- Clear highlighting
-command('C', 'let @/=""', {})
+command("C", "let @/=''", {})
 
 -- }}}
 
@@ -205,113 +204,122 @@ end
 
 -- }}}
 
--- coc {{{
+-- lsp and completion {{{
 
 --[[
 
-Official documentation: https://github.com/neoclide/coc.nvim#readme
-
-Continuing with coc for now because configuring lsp + completion + formatting was a rabbit hole.
-May revisit later.
+Official documentation: -- TODO: add links
 
 --]]
 
--- extensions
-vim.cmd [[
-  " coc syntax extensions
-  let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-markdownlint', 'coc-sumneko-lua']
+local on_attach = function(_, bufnr)
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = "LSP: " .. desc
+    end
 
-  " conditionally use prettier & eslint
-  if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-    let g:coc_global_extensions += ['coc-prettier']
-  endif
+    vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
+  end
 
-  if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-    let g:coc_global_extensions += ['coc-eslint']
-  endif
-]]
+  nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+  nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 
--- keymaps
-vim.cmd [[
-  " Use <cr> to confirm completion
-  inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "<CR>"
+  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
+  nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+  nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+  nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
+  nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
+  nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 
-  " Use tab to scroll autocomplete
-  inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
-  inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+  nmap("K", vim.lsp.buf.hover, "Hover Documentation")
+  nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-  " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
+  -- format
+  nmap("<leader>fmt", vim.lsp.buf.format, "[F]or[m]a[t]")
+end
 
-  " Use `[g` and `]g` to navigate diagnostics
-  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+local servers = {
+  tsserver = {},
+  eslint = {},
+  clojure_lsp = {},
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  },
+}
 
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
+-- Setup neovim lua configuration
+require("neodev").setup()
 
-  " Use K to show documentation in preview window.
-   nnoremap <silent> K :call ShowDocumentation()<CR>
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-  function! ShowDocumentation()
-    if CocAction('hasProvider', 'hover')
-      call CocActionAsync('doHover')
-    else
-      call feedkeys('K', 'in')
-    endif
-  endfunction
+-- Ensure the servers above are installed
+local mason_lspconfig = require "mason-lspconfig"
 
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+mason_lspconfig.setup {
+  ensure_installed = vim.tbl_keys(servers),
+}
 
-  " Symbol renaming.
-  nmap <leader>rn <Plug>(coc-rename)
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require("lspconfig")[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+      filetypes = (servers[server_name] or {}).filetypes,
+    }
+  end
+}
 
-  " Add `:Format` command to format current buffer.
-  command! -nargs=0 Format :call CocActionAsync('format')
+local cmp = require "cmp"
+local luasnip = require "luasnip"
+require("luasnip.loaders.from_vscode").lazy_load()
+luasnip.config.setup {}
 
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-  " Add `:OR` command for organize imports of the current buffer.
-  command! -nargs=0 OR :call CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-  " Remap <C-f> and <C-b> for scroll float windows/popups.
-  if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  endif
-
-  " Mappings for CoCList
-  " Show all diagnostics.
-  nnoremap <silent><nowait> <Leader>a  :<C-u>CocList diagnostics<cr>
-  " Manage extensions.
-  nnoremap <silent><nowait> <Leader>e  :<C-u>CocList extensions<cr>
-  " Show commands.
-  nnoremap <silent><nowait> <Leader>c  :<C-u>CocList commands<cr>
-  " Find symbol of current document.
-  nnoremap <silent><nowait> <Leader>o  :<C-u>CocList outline<cr>
-  " Search workspace symbols.
-  nnoremap <silent><nowait> <Leader>s  :<C-u>CocList -I symbols<cr>
-  " Do default action for next item.
-  nnoremap <silent><nowait> <Leader>j  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent><nowait> <Leader>k  :<C-u>CocPrev<CR>
-  " Resume latest coc list.
-  nnoremap <silent><nowait> <Leader>p  :<C-u>CocListResume<CR>
-]]
+cmp.setup {
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert {
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete {},
+    ["<CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true,
+    },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  },
+  sources = {
+    { name = "nvim_lsp" },
+    { name = "luasnip" },
+  },
+}
 
 
 -- }}}
@@ -340,7 +348,9 @@ treesitter_configs.setup({
     "json",
     "lua",
     "tsx",
-    "typescript"
+    "typescript",
+    "scala",
+    "clojure"
   },
   sync_install = false,
   auto_install = true,
@@ -352,7 +362,7 @@ treesitter_configs.setup({
   },
   rainbow = {
     enable = true,
-    disable = {}, 
+    disable = {},
     extended_mode = true,
     max_file_lines = nil,
   }
@@ -368,36 +378,17 @@ Official documentation: https://github.com/nvim-telescope/telescope.nvim#telesco
 
 --]]
 
-require("telescope").load_extension('fzf')
+require("telescope").load_extension("fzf")
 
-keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
+keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').git_files()<CR>", opts)
+keymap("n", "<leader>faf", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
 keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
+keymap("n", "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts)
+keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
 keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
 keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
-keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts)
+keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts) -- TODO: try having this as a dropdown instead
 keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<CR>", opts)
-
---[[
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
--]]
-
--- }}}
-
--- lualine {{{
-
---[[
-
-Official documentation: https://github.com/nvim-lualine/lualine.nvim#lualinenvim
-
---]]
-require('lualine').setup {
-  options = { theme = require("lualine.themes.dracula") },
-  ...
-}
 
 -- }}}
 
