@@ -340,7 +340,9 @@ treesitter_configs.setup({
     "json",
     "lua",
     "tsx",
-    "typescript"
+    "typescript",
+    "scala",
+    "clojure"
   },
   sync_install = false,
   auto_install = true,
@@ -352,7 +354,7 @@ treesitter_configs.setup({
   },
   rainbow = {
     enable = true,
-    disable = {}, 
+    disable = {},
     extended_mode = true,
     max_file_lines = nil,
   }

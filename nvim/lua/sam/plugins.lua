@@ -27,7 +27,6 @@ return packer.startup({function()
   -- syntax highlighting
   use {"neoclide/coc.nvim", branch = "release"}
 
-  -- syntax highlighting
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -42,6 +41,9 @@ return packer.startup({function()
 
   -- close parens
   use {"raimondi/delimitmate"}
+
+  -- language specific support
+  use "Olical/conjure"
  
 end,
 config = {
