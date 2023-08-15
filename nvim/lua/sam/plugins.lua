@@ -1,45 +1,45 @@
 -- Install package manager
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable',
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
     lazypath,
   }
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
+require("lazy").setup({
   -- lsp
   {
-    'neovim/nvim-lspconfig',
+    "neovim/nvim-lspconfig",
     dependencies = {
-      { 'williamboman/mason.nvim', config = true },
-      'williamboman/mason-lspconfig.nvim',
-      'folke/neodev.nvim',
+      { "williamboman/mason.nvim", config = true },
+      "williamboman/mason-lspconfig.nvim",
+      "folke/neodev.nvim",
     },
   },
 
   -- completion
   {
-    'hrsh7th/nvim-cmp',
+    "hrsh7th/nvim-cmp",
     dependencies = {
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-nvim-lsp',
-      'rafamadriz/friendly-snippets',
+      "L3MON4D3/LuaSnip",
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "rafamadriz/friendly-snippets",
     },
   },
-  
+
   -- help with keybinds
-  { 'folke/which-key.nvim', opts = {} },
+  { "folke/which-key.nvim", opts = {} },
 
   -- colorscheme
   {
-    'Mofiqul/dracula.nvim',
+    "Mofiqul/dracula.nvim",
     lazy = false,
     priority = 1000,
     config = function()
@@ -49,33 +49,33 @@ require('lazy').setup({
 
   -- statusline
   {
-    'nvim-lualine/lualine.nvim',
+    "nvim-lualine/lualine.nvim",
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'dracula',
-        component_separators = '|',
-        section_separators = '',
+        theme = "dracula",
+        component_separators = "|",
+        section_separators = "",
       },
     },
   },
 
   -- fuzzy finding
   {
-    'nvim-telescope/telescope.nvim',
-    branch = '0.1.x',
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
       {
-        'nvim-telescope/telescope-fzf-native.nvim',
+        "nvim-telescope/telescope-fzf-native.nvim",
         -- NOTE: If you are having trouble with this installation,
         --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
+        build = "make",
         cond = function()
-          return vim.fn.executable 'make' == 1
+          return vim.fn.executable "make" == 1
         end,
       },
     },
@@ -83,22 +83,22 @@ require('lazy').setup({
 
   -- syntax highlighting
   {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
+      "nvim-treesitter/nvim-treesitter-textobjects",
     },
-    build = ':TSUpdate',
-  },  
+    build = ":TSUpdate",
+  },
 
   -- close parens
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {}
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { "numToStr/Comment.nvim", opts = {} },
 
   -- language specific support
   {
@@ -122,12 +122,17 @@ require('lazy').setup({
             end,
         },
     },
-    config = function(_, opts)
+    config = function(_, _)
         require("conjure.main").main()
         require("conjure.mapping")["on-filetype"]()
     end,
     init = function()
-        vim.g["conjure#debug"] = true
+        vim.g["conjure#debug"] = false
     end,
+  },
+  {
+    'prettier/vim-prettier',
+    run = 'yarn install --frozen-lockfile --production',
+    ft = {'javascript', 'typescript', 'css', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'}
   }
 }, {})
