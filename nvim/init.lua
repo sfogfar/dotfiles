@@ -164,7 +164,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- commands {{{
 
---[[ 
+--[[
 
 Official documentation: https://neovim.io/doc/user/api.html#nvim_create_user_command()
 
@@ -236,11 +236,13 @@ local on_attach = function(_, bufnr)
 
   -- format
   nmap("<leader>fmt", vim.lsp.buf.format, "[F]or[m]a[t]")
-
 end
 
 local servers = {
   tsserver = {},
+  eslint = {},
+  prettier = {},
+  clojure = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
