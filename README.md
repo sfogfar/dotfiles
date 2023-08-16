@@ -19,10 +19,11 @@ For example, VSCode extensions and settings.json are more easily managed by sync
 
 ## TODOs
 
-- Rewrite nvim init with Lua.
 - Try using lsp directly in nvim, rather than via plugin.
-- Make portable, or start mac-os branch.
+- Bring final vimscript functions across to Lua.
 - Add i3 setup instructions for Linux.
+- Try and get gui MacOS settings defined in config files.
+- MacOS setup guide.
 
 ## Setting up a system from scratch
 
