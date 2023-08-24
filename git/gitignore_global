@@ -2,3 +2,5 @@
 *.sw?
 .idea/
 .bsp/
+scratch.*
+*.orig
