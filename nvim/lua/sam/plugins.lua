@@ -131,4 +131,10 @@ require("lazy").setup({
       vim.g["conjure#debug"] = false
     end,
   },
+
+  {
+    "scalameta/nvim-metals",
+    ft = { "scala", "sbt", "java" },
+    dependencies = { "nvim-lua/plenary.nvim" }
+  }
 }, {})
