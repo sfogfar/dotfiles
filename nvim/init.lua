@@ -81,6 +81,9 @@ vim.opt.swapfile = false
 vim.opt.writebackup = false
 vim.opt.undofile = true
 
+-- Required for scala, see: https://www.youtube.com/watch?v=ihKdrhPaZjg at 1:15:30
+-- vim.opt.shortmess = string.gsub(vim.opt.shortmess, 'F', '') .. 'c'
+
 -- }}}
 
 -- keymaps {{{
@@ -230,7 +233,7 @@ local on_attach = function(_, bufnr)
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
   -- format
-  nmap("<leader>fmt", vim.lsp.buf.format, "[F]or[m]a[t]")
+  nmap("<leader>f", vim.lsp.buf.format, "[F]ormat")
 end
 
 local servers = {
@@ -385,40 +388,6 @@ keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>
 keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts) -- TODO: try having this as a dropdown instead
 keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<CR>", opts)
 
--- }}}
-
--- metals {{{
-
---[[
-
-Official documentation: https://github.com/scalameta/nvim-metals/discussions/39
-
-Relevant notes: <foo is bar, bar is baz...>
-
---]]
-
-local metals_config = require("metals").bare_config()
-
--- Example of settings
-metals_config.settings = {
-  showImplicitArguments = true,
-  excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
-}
-
-metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- Autocmd that will actually be in charging of starting the whole thing
-local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-vim.api.nvim_create_autocmd("FileType", {
-  -- NOTE: You may or may not want java included here. You will need it if you
-  -- want basic Java support but it may also conflict if you are using
-  -- something like nvim-jdtls which also works on a java filetype autocmd.
-  pattern = { "scala", "sbt", "java" },
-  callback = function()
-    require("metals").initialize_or_attach(metals_config)
-  end,
-  group = nvim_metals_group,
-})
 -- }}}
 
 -- new section template {{{
