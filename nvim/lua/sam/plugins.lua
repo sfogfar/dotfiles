@@ -35,7 +35,7 @@ require("lazy").setup({
   },
 
   -- help with keybinds
-  { "folke/which-key.nvim", opts = {} },
+  { "folke/which-key.nvim",      opts = {} },
 
   -- colorscheme
   {
@@ -104,7 +104,7 @@ require("lazy").setup({
   -- language specific support
   {
     "Olical/conjure",
-    ft = { "clojure", "fennel", "python" },
+    ft = { "clojure", "fennel", "scheme" },
     dependencies = {
       {
         "PaterJason/cmp-conjure",
@@ -131,4 +131,13 @@ require("lazy").setup({
       vim.g["conjure#debug"] = false
     end,
   },
+  {
+    "clojure-vim/vim-jack-in",
+    lazy = true,
+    ft = {"clojure"},
+    dependencies = {
+      "tpope/vim-dispatch",
+      "radenling/vim-dispatch-neovim",
+    }
+  }
 }, {})
