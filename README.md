@@ -44,7 +44,7 @@ For example, VSCode extensions and settings.json are more easily managed by sync
 1. Install [Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
 2. Run `nvim +checkhealth`, making sure to check python and node providers.
 3. Install [packer](https://github.com/wbthomason/packer.nvim#quickstart).
-4. `ln -s ~/dotfiles/nvim/ ~/.config/nvim/`
+4. `ln -s ~/dotfiles/nvim/ ~/.config/nvim`
 
 _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint by running `sudo apt install g++`.
 
@@ -52,15 +52,15 @@ _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 
 1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) 
 2. [Linux] Add to desktop.
-2. `ln -s ~/dotfiles/kitty ~/.config/kitty`
+2. `ln -s ~/dotfiles/kitty/ ~/.config/kitty`
 
 #### Fish
 
 1. Install [Fish](https://fishshell.com/).
-2. [macOS] `set -U fish_user_paths /usr/local/bin $fish_user_paths`
+2. [macOS] Using zsh: `echo $path`, then using fish: `fish_add_path ...` for each relevant.
 3. Install [Starship](https://starship.rs/).
 4. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
-5. `ln -s ~/dotfiles/fish/functions ~/.config/fish/functions`
+5. `ln -s ~/dotfiles/fish/functions/ ~/.config/fish/functions`
 6. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
 7. `fish_config` to set the theme.
 
@@ -69,7 +69,8 @@ _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 1. Install [fzf](https://github.com/junegunn/fzf#using-git).
 2. Install [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
 3. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
-4. Install [fd](https://github.com/BurntSushi/ripgrep#installation).
+4. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).
+5. Install [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation).
 
 ##### tree
 
@@ -104,3 +105,8 @@ Install [JetBrains mono](https://github.com/JetBrains/JetBrainsMono#brew-macos-o
 
 1. Install [Raycast](https://www.raycast.com/).
 2. Disable hotkey for Spotlight.
+
+#### [MacOS] Screenshots
+
+1. `mkdir ~/Pictures/screenshots`
+2. `defaults write com.apple.screencapture location ~/Pictures/screenshots`
