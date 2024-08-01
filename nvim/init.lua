@@ -100,7 +100,7 @@ local opts = { noremap = true, silent = true }
 
 keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = ","
 
 
 -- normal {{{
@@ -222,6 +222,7 @@ local on_attach = function(_, bufnr)
   nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
   nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
   nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
+  nmap("ga", vim.lsp.buf.code_action, "[G]oto [A]ctions")
   nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
   nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
   nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
