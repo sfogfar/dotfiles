@@ -346,7 +346,8 @@ treesitter_configs.setup({
     "tsx",
     "typescript",
     "scala",
-    "clojure"
+    "clojure",
+    "go"
   },
   sync_install = false,
   auto_install = true,

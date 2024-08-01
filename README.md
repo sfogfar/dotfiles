@@ -94,7 +94,7 @@ For the sites that only work properly on Chrome.
 
 #### Font
 
-Install [JetBrains mono](https://www.jetbrains.com/lp/mono/#how-to-install).
+Install [JetBrains mono](https://github.com/JetBrains/JetBrainsMono#brew-macos-only).
 
 #### VS Code
 
