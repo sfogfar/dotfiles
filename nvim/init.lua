@@ -312,11 +312,27 @@ cmp.setup {
     end, { "i", "s" }),
   },
   sources = {
-    { name = "nvim_lsp" },
+    -- useful for nvim config
+    { name = "nvim_lua" },
     { name = "luasnip" },
+    -- standard completion
+    { name = "nvim_lsp" },
+    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'treesitter' },
+    -- prose writing
+    {
+      name = 'dictionary',
+      keyword_length = 2,
+    }
   },
 }
 
+require("cmp_dictionary").setup({
+ dic = {
+   ["*"] = { "/usr/share/dict/words" },
+ },
+})
 
 -- }}}
 
@@ -421,6 +437,35 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
   group = nvim_metals_group,
 })
+-- }}}
+
+-- prose writing {{{
+
+--[[
+
+Official documentation: <url>
+
+Relevant notes: <foo is bar, bar is baz...>
+
+--]]
+
+-- Set up an autocommand group
+vim.api.nvim_create_augroup("FormatOptions", { clear = true })
+
+-- Add autocommands for txt and md files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+    group = "FormatOptions",
+    pattern = { "text", "markdown" },
+    callback = function()
+        -- Set text width to 80 characters
+        vim.opt_local.textwidth = 80
+        -- Enable automatic text wrapping
+        vim.opt_local.formatoptions:append("t")
+        -- Optionally, enable automatic wrapping as you type
+        vim.opt_local.formatoptions:append("a")
+    end,
+})
+
 -- }}}
 
 -- new section template {{{

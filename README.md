@@ -95,6 +95,7 @@ For the sites that only work properly on Chrome.
 #### Font
 
 Install [JetBrains mono](https://github.com/JetBrains/JetBrainsMono#brew-macos-only).
+Download "NerdFontsSymbolsOnly.tar.xz" from [here](https://github.com/ryanoasis/nerd-fonts/releases), open with Font Book and Kitty should load these automatically.
 
 #### VS Code
 

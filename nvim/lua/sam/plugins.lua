@@ -31,6 +31,7 @@ require("lazy").setup({
       "saadparwaiz1/cmp_luasnip",
       "hrsh7th/cmp-nvim-lsp",
       "rafamadriz/friendly-snippets",
+      "uga-rosa/cmp-dictionary"
     },
   },
 
