@@ -54,6 +54,11 @@ _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 2. [Linux] Add to desktop.
 2. `ln -s ~/dotfiles/kitty/ ~/.config/kitty`
 
+#### ZSH
+1. `ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv`
+1. `ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc`
+3. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
+
 #### Fish
 
 1. Install [Fish](https://fishshell.com/).
@@ -66,7 +71,9 @@ _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 
 #### Command line comforts
 
-1. Install [fzf](https://github.com/junegunn/fzf#using-git).
+1. Install [fzf](https://github.com/junegunn/fzf#using-git). Note: Disable
+   conflicting window management command for launch in Raycast / Window
+   Management.
 2. Install [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
 3. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
 4. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).

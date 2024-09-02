@@ -1,0 +1,4 @@
+# export ZDOTDIR="~/dotfiles/zsh/"
+export EDITOR="nvim"
+export GIT_EDITOR="nvim"
+export VISUAL="nvim"
