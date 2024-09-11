@@ -449,22 +449,64 @@ Relevant notes: <foo is bar, bar is baz...>
 
 --]]
 
--- Set up an autocommand group
-vim.api.nvim_create_augroup("FormatOptions", { clear = true })
+local M = {}
 
--- Add autocommands for txt and md files
-vim.api.nvim_create_autocmd({ "FileType" }, {
-    group = "FormatOptions",
-    pattern = { "text", "markdown" },
+function M.setup_prose_mode()
+  vim.wo.wrap = true
+  vim.wo.linebreak = true
+  vim.wo.breakindent = true
+
+  vim.bo.textwidth = 80
+
+  vim.wo.spell = true
+  vim.bo.spelllang = "en_gb"
+
+  vim.opt_local.formatoptions:append {
+    t = true,  -- Auto-wrap text using textwidth
+    n = true,  -- Recognize numbered lists
+    ['1'] = true,  -- Don't break a line after a one-letter word
+  }
+
+  vim.bo.softtabstop = 2
+  vim.bo.shiftwidth = 2
+
+  -- Map j and k to gj and gk (move by visual lines)
+  vim.keymap.set("n", "j", "gj", { buffer = true })
+  vim.keymap.set("n", "k", "gk", { buffer = true })
+
+  -- Set up autocommands for auto-wrapping in insert mode
+  local group = vim.api.nvim_create_augroup("ProseAutoWrap", { clear = true })
+  vim.api.nvim_create_autocmd("InsertEnter", {
+    group = group,
+    buffer = 0,
     callback = function()
-        -- Set text width to 80 characters
-        vim.opt_local.textwidth = 80
-        -- Enable automatic text wrapping
-        vim.opt_local.formatoptions:append("t")
-        -- Optionally, enable automatic wrapping as you type
-        vim.opt_local.formatoptions:append("a")
+      vim.opt_local.formatoptions:append { a = true }  -- Auto-format in insert mode
     end,
+  })
+  vim.api.nvim_create_autocmd("InsertLeave", {
+    group = group,
+    buffer = 0,
+    callback = function()
+      vim.opt_local.formatoptions:remove { a = true }  -- Disable auto-format when leaving insert mode
+    end,
+  })
+
+  -- Add keybinding for manual reformatting
+  vim.keymap.set("n", "<leader>fmt", "gqip", { buffer = true, desc = "Reformat paragraph" })
+  vim.keymap.set("v", "<leader>fmt", "gq", { buffer = true, desc = "Reformat selection" })
+
+  print("Prose mode activated")
+end
+
+-- Set up autocommands to activate prose mode for certain filetypes
+local prose_group = vim.api.nvim_create_augroup("ProseMode", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+  group = prose_group,
+  pattern = { "markdown", "text" },
+  callback = M.setup_prose_mode,
 })
+
+-- Optionally, add a command to manually toggle pro
 
 -- }}}
 
