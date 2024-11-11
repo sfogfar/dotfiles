@@ -88,3 +88,11 @@ eval "$(starship init zsh)"
 # }}}
 
 # vim:foldmethod=marker:foldlevel=0
+
+# pnpm
+export PNPM_HOME="/Users/samcooper/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

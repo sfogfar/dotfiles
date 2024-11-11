@@ -32,13 +32,11 @@ this repo.
 
 ## Setting up a system from scratch
 
-### Linux or MacOS
-
-#### [macOS] Homebrew
+### [macOS] Homebrew
 
 1. Install [Homebrew](https://brew.sh/).
 
-#### Git
+### Git
 
 1. `sudo apt install git` || `brew install git`
 2. [Connect to GitHub with
@@ -46,86 +44,78 @@ SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/gen
 3. `ln -s ~/dotfiles/git/gitconfig ~/.gitconfig`
 4. `ln -s ~/dotfiles/git/gitignore_global ~/.gitignore_global`
 
-#### Neovim
+### Neovim
 
 1. Install
-[Neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim#linux).
+   [Neovim](https://github.com/neovim/neovim?tab=readme-ov-file#install-from-package).
 2. Run `nvim +checkhealth`, making sure to check python and node providers.
-3. Install [packer](https://github.com/wbthomason/packer.nvim#quickstart).
-4. `ln -s ~/dotfiles/nvim/ ~/.config/nvim`
+3. `ln -s ~/dotfiles/nvim/ ~/.config/nvim`
 
 _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 by running `sudo apt install g++`.
 
-#### Kitty
+### Kitty
 
 1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) 
-2. [Linux] Add to desktop.
-2. `ln -s ~/dotfiles/kitty/ ~/.config/kitty`
+2. [Linux only] Add to desktop.
+3. `ln -s ~/dotfiles/kitty/ ~/.config/kitty`
 
-#### ZSH
+### ZSH
+
 1. `ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv`
-1. `ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc`
+2. `ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc`
 3. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
 
-#### Fish
+### Fish
 
 1. Install [Fish](https://fishshell.com/).
-2. [macOS] Using zsh: `echo $path`, then using fish: `fish_add_path ...` for
-each relevant.
-3. Install [Starship](https://starship.rs/).
-4. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
-5. `ln -s ~/dotfiles/fish/functions/ ~/.config/fish/functions`
-6. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
-7. `fish_config` to set the theme.
+2. [macOS only] Using zsh: `echo $path`, then using fish: `fish_add_path ...`
+   for each relevant.
+3. `ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish`
+4. `ln -s ~/dotfiles/fish/functions/ ~/.config/fish/functions`
 
-#### Command line comforts
+### Command line comforts
 
-1. Install [fzf](https://github.com/junegunn/fzf#using-git). Note: Disable
+1. Install [Starship](https://starship.rs/).
+2. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
+3. Install [fzf](https://github.com/junegunn/fzf#using-git). Note: Disable
 conflicting window management command for launch in Raycast / Window Management.
-2. Install [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
-3. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
-4. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).
-5. Install
-[bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation).
+3. [Fish only] Install
+   [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
 
-##### tree
+#### MacOS
+4. `brew install ripgrep fd bat tree`
 
-1. `sudo apt install tree` || `brew install tree`
+#### Linux
+4. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
+5. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).
+6. Install
+   [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation).
 
-#### Browser
+### Browser
 
-##### LibreWolf
+Anything with the [Bitwarden](https://bitwarden.com/) extension.
 
-For general browsing with excellent privacy.
+### Font
 
-1. Install [LibreWolf](https://librewolf.net/).
-2. Install
-[Bitwarden](https://addons.mozilla.org/en-US/firefox/addon/bitwarden-password-manager/).
-3. Update default browser (under _preferred applications_ in Mint).
+[JetBrains mono](https://github.com/JetBrains/JetBrainsMono#brew-macos-only).
 
-##### Brave
+### VS Code 
 
-For the sites that only work properly on Chrome.
-
-1. Install [Brave](https://brave.com/download/).
-
-#### Font
-
-Install [JetBrains
-mono](https://github.com/JetBrains/JetBrainsMono#brew-macos-only).
-
-#### VS Code
+Useful for markdown previews and git conflict resolution.
 
 1. Install [VS Code](https://code.visualstudio.com/).
 2. Turn on sync.
 
-#### [MacOS] Navigation
+### MacOS system settings
 
-1. Install [Raycast](https://www.raycast.com/).
-2. Disable hotkey for Spotlight.
+##### Navigation
 
-#### [MacOS] Screenshots
+1. Install [Raycast](https://www.raycast.com/) and disable hot key for
+   Spotlight.
+2. Enable touch to click.
+
+##### Screenshots
 
 1. `mkdir ~/Pictures/screenshots`
 2. `defaults write com.apple.screencapture location ~/Pictures/screenshots`

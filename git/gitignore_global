@@ -1,6 +1,65 @@
-.DS_Store
-*.sw?
-.idea/
-.bsp/
 scratch.*
 *.orig
+
+### Language tooling ###
+
+# Scala
+.bsp/
+
+# Clojure
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/lib/
+/classes/
+/target/
+/checkouts/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+.nrepl-port
+.cpcache/
+.calva/
+.clj-kondo/.cache/
+.lsp/.cache/
+
+### Editors ###
+
+# Vim / Neovim
+[._]*.s[a-v][a-z]
+!*.svg
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+tags
+tags.*
+Session.vim
+Sessionx.vim
+.netrwhist
+
+# Other
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+### OS specific ###
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux
+.directory
+.Trash-*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+

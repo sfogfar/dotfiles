@@ -102,6 +102,18 @@ require("lazy").setup({
   -- commenting
   { "numToStr/Comment.nvim", opts = {} }, -- "gc" to comment visual regions/lines
 
+  -- git
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true
+  },
+
   -- language specific support
   {
     "Olical/conjure",
@@ -135,7 +147,7 @@ require("lazy").setup({
   {
     "clojure-vim/vim-jack-in",
     lazy = true,
-    ft = {"clojure"},
+    ft = { "clojure" },
     dependencies = {
       "tpope/vim-dispatch",
       "radenling/vim-dispatch-neovim",
