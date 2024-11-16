@@ -80,6 +80,17 @@ require("lazy").setup({
     },
   },
 
+  -- file management
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  },
+
   -- syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
@@ -92,10 +103,16 @@ require("lazy").setup({
   -- formatting
   { "mhartington/formatter.nvim" },
 
-  -- close parens
+  -- editing
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
+    opts = {}
+  },
+
+  {
+    "dundalek/parpar.nvim",
+    dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
     opts = {}
   },
 
@@ -144,6 +161,7 @@ require("lazy").setup({
       vim.g["conjure#debug"] = false
     end,
   },
+
   {
     "clojure-vim/vim-jack-in",
     lazy = true,
@@ -153,6 +171,7 @@ require("lazy").setup({
       "radenling/vim-dispatch-neovim",
     }
   },
+
   {
     "scalameta/nvim-metals",
     ft = { "scala", "sbt", "java" },
