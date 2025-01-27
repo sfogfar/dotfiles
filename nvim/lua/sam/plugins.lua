@@ -36,7 +36,10 @@ require("lazy").setup({
   },
 
   -- help with keybinds
-  { "folke/which-key.nvim",      opts = {} },
+  {
+    "folke/which-key.nvim",
+    opts = {}
+  },
 
   -- colorscheme
   {
@@ -46,13 +49,19 @@ require("lazy").setup({
     opts = {}
   },
 
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000
+  },
+
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
     opts = {
       options = {
         icons_enabled = false,
-        theme = "tokyonight",
+        theme = "catppuccin",
         component_separators = "|",
         section_separators = "",
       },
@@ -117,13 +126,13 @@ require("lazy").setup({
   },
 
   -- commenting
-  { "numToStr/Comment.nvim", opts = {} }, -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim",     opts = {} }, -- "gc" to comment visual regions/lines
 
   -- git
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- required
+      "nvim-lua/plenary.nvim",  -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
 
       "nvim-telescope/telescope.nvim",

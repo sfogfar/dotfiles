@@ -194,8 +194,9 @@ require "sam.plugins"
 
 -- colorscheme {{{
 
-vim.cmd [[colorscheme tokyonight-storm]]
+-- vim.cmd [[colorscheme tokyonight-storm]]
 -- vim.cmd[[colorscheme tokyonight-day]]
+vim.cmd.colorscheme "catppuccin-latte"
 
 -- }}}
 
@@ -235,8 +236,6 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
-  tsserver = {},
-  eslint = {},
   clojure_lsp = {},
   lua_ls = {
     Lua = {
@@ -244,6 +243,8 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  ts_ls = {},
+  eslint = {},
 }
 
 -- Setup neovim lua configuration
