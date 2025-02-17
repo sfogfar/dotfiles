@@ -120,8 +120,8 @@ require("lazy").setup({
   },
 
   {
-    "dundalek/parpar.nvim",
-    dependencies = { "gpanders/nvim-parinfer", "julienvincent/nvim-paredit" },
+    "PaterJason/nvim-treesitter-sexp",
+    dependencies = {},
     opts = {}
   },
 
