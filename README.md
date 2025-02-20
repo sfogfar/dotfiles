@@ -49,7 +49,8 @@ SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/gen
 1. Install
    [Neovim](https://github.com/neovim/neovim?tab=readme-ov-file#install-from-package).
 2. Run `nvim +checkhealth`, making sure to check python and node providers.
-3. `ln -s ~/dotfiles/nvim/ ~/.config/nvim`
+3. `mkdir .config`
+4. `ln -s ~/dotfiles/nvim ~/.config/
 
 _Note:_ Resolved compilation error when installing nvim-treesitter on Linux Mint
 by running `sudo apt install g++`.
@@ -58,13 +59,13 @@ by running `sudo apt install g++`.
 
 1. Install [Kitty](https://sw.kovidgoyal.net/kitty/) 
 2. [Linux only] Add to desktop.
-3. `ln -s ~/dotfiles/kitty/ ~/.config/kitty`
+3. ```rm -rf ~/dotfiles/kitty```
+4. ```ln -s ~/dotfiles/kitty/ ~/.config/kitty```
 
 ### ZSH
 
 1. `ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv`
 2. `ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc`
-3. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
 
 ### Fish
 
@@ -78,18 +79,20 @@ by running `sudo apt install g++`.
 
 1. Install [Starship](https://starship.rs/).
 2. `ln -s ~/dotfiles/starship/starship.toml ~/.config/starship.toml`
-3. Install [fzf](https://github.com/junegunn/fzf#using-git). Note: Disable
-conflicting window management command for launch in Raycast / Window Management.
-3. [Fish only] Install
+3. Install
+   [fzf](https://github.com/junegunn/fzf?tab=readme-ov-file#installation).
+   Note: Disable conflicting window management command for launch in Raycast
+   / Window Management.
+4. [Fish only] Install
    [fzf.fish](https://github.com/PatrickF1/fzf.fish#installation).
 
 #### MacOS
-4. `brew install ripgrep fd bat tree`
+5. `brew install ripgrep fd bat tree`
 
 #### Linux
-4. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
-5. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).
-6. Install
+5. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
+6. Install [fd](https://github.com/sharkdp/fd?tab=readme-ov-file#installation).
+7. Install
    [bat](https://github.com/sharkdp/bat?tab=readme-ov-file#installation).
 
 ### Browser

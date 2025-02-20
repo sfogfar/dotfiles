@@ -208,31 +208,84 @@ Official documentation: -- TODO: add links
 
 --]]
 
+local fzf = require('fzf-lua')
+
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
       desc = "LSP: " .. desc
     end
-
     vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
   end
 
+  local vmap = function(keys, func, desc)
+    if desc then
+      desc = "LSP: " .. desc
+    end
+    vim.keymap.set("v", keys, func, { buffer = bufnr, desc = desc })
+  end
+
+  -- LSP core actions
   nmap("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-  nmap("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-  nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
-  nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-  nmap("gI", vim.lsp.buf.implementation, "[G]oto [I]mplementation")
-  nmap("ga", vim.lsp.buf.code_action, "[G]oto [A]ctions")
-  nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
-  nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-  nmap("<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-  -- format
+  -- LSP navigation (keeping 'g' prefix as it's a common Vim idiom)
+  nmap("gd", fzf.lsp_definitions, "[G]oto [D]efinition")
+  nmap("gr", fzf.lsp_references, "[G]oto [R]eferences")
+  nmap("gI", fzf.lsp_implementations, "[G]oto [I]mplementation")
+  nmap("ga", fzf.lsp_code_actions, "[G]oto [A]ctions")
+  nmap("<leader>D", fzf.lsp_typedefs, "Type [D]efinition")
+  nmap("<leader>ds", fzf.lsp_document_symbols, "[D]ocument [S]ymbols")
+  nmap("<leader>ws", fzf.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+
+  -- Formatting
   nmap("<leader>fmt", vim.lsp.buf.format, "[F]or[m]a[t]")
+  vmap("<leader>fmt", function()
+    vim.lsp.buf.format({
+      range = {
+        ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+        ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+      }
+    })
+  end, "[F]or[m]a[t] selection")
+
+  -- Search commands by scope
+  -- Project-wide searches
+  nmap("<leader>sp", function() fzf.git_files() end, "[S]earch [P]roject files")      -- Was <leader>ff
+  nmap("<leader>sa", function() fzf.files() end, "[S]earch [A]ll files")              -- Was <leader>faf
+  nmap("<leader>sg", function() fzf.live_grep() end, "[S]earch by [G]rep")            -- Was <leader>fg
+  nmap("<leader>sw", function() fzf.grep_cword() end, "[S]earch [W]ord under cursor") -- Was <leader>fw
+
+  -- Buffer-specific searches
+  nmap("<leader>sb", function() fzf.buffers() end, "[S]earch [B]uffers") -- Was <leader>fb
+  nmap("<leader>sl", function()
+    fzf.blines({
+      winopts = { height = 0.33, width = 0.95, row = 0.99 }
+    })
+  end, "[S]earch [L]ines in buffer") -- Was <leader>fib
+
+  -- Diagnostic searches
+  nmap("<leader>sd", function() fzf.diagnostics() end, "[S]earch [D]iagnostics") -- Was <leader>fd
+
+  -- Resume last search
+  nmap("<leader>sr", function() fzf.resume() end, "[S]earch [R]esume") -- Was <leader>fr
+
+  -- Git history exploration
+  nmap("<leader>gh", function() fzf.git_commits() end, "[G]it [H]istory")
+  nmap("<leader>gf", function() fzf.git_bcommits() end, "[G]it [F]ile history")
+
+  -- Command and search history
+  nmap("<leader>:", function() fzf.command_history() end, "Command History")
+  nmap("<leader>/", function() fzf.search_history() end, "Search History")
+
+  -- Keymaps
+  nmap("<leader>sk", function()
+    fzf.keymaps({
+      winopts = { height = 0.75, width = 0.75 },
+      show_details = true -- Shows mode, buffer-local status etc
+    })
+  end, "[S]earch [K]eymaps")
 end
 
 local servers = {
@@ -325,14 +378,16 @@ cmp.setup {
     {
       name = 'dictionary',
       keyword_length = 2,
-    }
+    },
+    -- clojure repl completion
+    { name = 'conjure' },
   },
 }
 
 require("cmp_dictionary").setup({
- dic = {
-   ["*"] = { "/usr/share/dict/words" },
- },
+  dic = {
+    ["*"] = { "/usr/share/dict/words" },
+  },
 })
 
 -- }}}
@@ -381,28 +436,6 @@ treesitter_configs.setup({
     max_file_lines = nil,
   }
 })
-
--- }}}
-
--- telescope {{{
-
---[[
-
-Official documentation: https://github.com/nvim-telescope/telescope.nvim#telescopenvim
-
---]]
-
-require("telescope").load_extension("fzf")
-
-keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').git_files()<CR>", opts)
-keymap("n", "<leader>faf", "<cmd>lua require('telescope.builtin').find_files()<CR>", opts)
-keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<CR>", opts)
-keymap("n", "<leader>fw", "<cmd>lua require('telescope.builtin').grep_string()<CR>", opts)
-keymap("n", "<leader>fd", "<cmd>lua require('telescope.builtin').diagnostics()<CR>", opts)
-keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<CR>", opts)
-keymap("n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<CR>", opts)
-keymap("n", "<leader>fib", "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", opts) -- TODO: try having this as a dropdown instead
-keymap("n", "<leader>fr", "<cmd>lua require('telescope.builtin').resume()<CR>", opts)
 
 -- }}}
 
@@ -520,9 +553,9 @@ function M.setup_prose_mode()
   vim.bo.spelllang = "en_gb"
 
   vim.opt_local.formatoptions:append {
-    t = true,  -- Auto-wrap text using textwidth
-    n = true,  -- Recognize numbered lists
-    ['1'] = true,  -- Don't break a line after a one-letter word
+    t = true,     -- Auto-wrap text using textwidth
+    n = true,     -- Recognize numbered lists
+    ['1'] = true, -- Don't break a line after a one-letter word
   }
 
   vim.bo.softtabstop = 2
@@ -538,14 +571,14 @@ function M.setup_prose_mode()
     group = group,
     buffer = 0,
     callback = function()
-      vim.opt_local.formatoptions:append { a = true }  -- Auto-format in insert mode
+      vim.opt_local.formatoptions:append { a = true } -- Auto-format in insert mode
     end,
   })
   vim.api.nvim_create_autocmd("InsertLeave", {
     group = group,
     buffer = 0,
     callback = function()
-      vim.opt_local.formatoptions:remove { a = true }  -- Disable auto-format when leaving insert mode
+      vim.opt_local.formatoptions:remove { a = true } -- Disable auto-format when leaving insert mode
     end,
   })
 

@@ -7,6 +7,10 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
+# }}}
+
+# fzf {{{
+
 # Added by fzf install script
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
