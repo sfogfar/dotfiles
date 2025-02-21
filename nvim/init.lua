@@ -210,6 +210,44 @@ Official documentation: -- TODO: add links
 
 local fzf = require('fzf-lua')
 
+-- Set up global fzf-lua commands that don't depend on LSP
+-- Project-wide searches
+vim.keymap.set("n", "<leader>fp", function() fzf.git_files() end, { desc = "[F]ind [P]roject files" })
+vim.keymap.set("n", "<leader>fa", function() fzf.files() end, { desc = "[F]ind [A]ll files" })
+vim.keymap.set("n", "<leader>fg", function() fzf.live_grep() end, { desc = "[F]ind by [G]rep" })
+vim.keymap.set("n", "<leader>fw", function() fzf.grep_cword() end, { desc = "[F]ind [W]ord under cursor" })
+
+-- Buffer-specific searches
+vim.keymap.set("n", "<leader>fb", function() fzf.buffers() end, { desc = "[F]ind [B]uffers" })
+vim.keymap.set("n", "<leader>fl", function()
+  fzf.blines({
+    winopts = { height = 0.33, width = 0.95, row = 0.99 }
+  })
+end, { desc = "[F]ind [L]ines in buffer" })
+
+-- Diagnostic searches
+vim.keymap.set("n", "<leader>fd", function() fzf.diagnostics() end, { desc = "[F]ind [D]iagnostics" })
+
+-- Resume last search
+vim.keymap.set("n", "<leader>fr", function() fzf.resume() end, { desc = "[F]ind [R]esume" })
+
+-- Git history exploration
+vim.keymap.set("n", "<leader>gh", function() fzf.git_commits() end, { desc = "[G]it [H]istory" })
+vim.keymap.set("n", "<leader>gf", function() fzf.git_bcommits() end, { desc = "[G]it [F]ile history" })
+
+-- Command and search history
+vim.keymap.set("n", "<leader>:", function() fzf.command_history() end, { desc = "Command History" })
+vim.keymap.set("n", "<leader>/", function() fzf.search_history() end, { desc = "Search History" })
+
+-- Keymaps
+vim.keymap.set("n", "<leader>fk", function()
+  fzf.keymaps({
+    winopts = { height = 0.75, width = 0.75 },
+    show_details = true
+  })
+end, { desc = "[F]ind [K]eymaps" })
+
+-- LSP-specific functions
 local on_attach = function(_, bufnr)
   local nmap = function(keys, func, desc)
     if desc then
@@ -230,7 +268,7 @@ local on_attach = function(_, bufnr)
   nmap("K", vim.lsp.buf.hover, "Hover Documentation")
   nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-  -- LSP navigation (keeping 'g' prefix as it's a common Vim idiom)
+  -- LSP navigation functions
   nmap("gd", fzf.lsp_definitions, "[G]oto [D]efinition")
   nmap("gr", fzf.lsp_references, "[G]oto [R]eferences")
   nmap("gI", fzf.lsp_implementations, "[G]oto [I]mplementation")
@@ -249,43 +287,6 @@ local on_attach = function(_, bufnr)
       }
     })
   end, "[F]or[m]a[t] selection")
-
-  -- Search commands by scope
-  -- Project-wide searches
-  nmap("<leader>fp", function() fzf.git_files() end, "[F]ind [P]roject files")      -- Was <leader>ff
-  nmap("<leader>fa", function() fzf.files() end, "[F]ind [A]ll files")              -- Was <leader>faf
-  nmap("<leader>fg", function() fzf.live_grep() end, "[F]ind by [G]rep")            -- Was <leader>fg
-  nmap("<leader>fw", function() fzf.grep_cword() end, "[F]ind [W]ord under cursor") -- Was <leader>fw
-
-  -- Buffer-specific searches
-  nmap("<leader>fb", function() fzf.buffers() end, "[F]ind [B]uffers") -- Was <leader>fb
-  nmap("<leader>fl", function()
-    fzf.blines({
-      winopts = { height = 0.33, width = 0.95, row = 0.99 }
-    })
-  end, "[F]ind [L]ines in buffer") -- Was <leader>fib
-
-  -- Diagnostic searches
-  nmap("<leader>fd", function() fzf.diagnostics() end, "[F]ind [D]iagnostics") -- Was <leader>fd
-
-  -- Resume last search
-  nmap("<leader>fr", function() fzf.resume() end, "[F]ind [R]esume") -- Was <leader>fr
-
-  -- Git history exploration
-  nmap("<leader>gh", function() fzf.git_commits() end, "[G]it [H]istory")
-  nmap("<leader>gf", function() fzf.git_bcommits() end, "[G]it [F]ile history")
-
-  -- Command and search history
-  nmap("<leader>:", function() fzf.command_history() end, "Command History")
-  nmap("<leader>/", function() fzf.search_history() end, "Search History")
-
-  -- Keymaps
-  nmap("<leader>fk", function()
-    fzf.keymaps({
-      winopts = { height = 0.75, width = 0.75 },
-      show_details = true -- Shows mode, buffer-local status etc
-    })
-  end, "[F]ind [K]eymaps")
 end
 
 local servers = {
