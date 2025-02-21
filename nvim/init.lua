@@ -252,24 +252,24 @@ local on_attach = function(_, bufnr)
 
   -- Search commands by scope
   -- Project-wide searches
-  nmap("<leader>sp", function() fzf.git_files() end, "[S]earch [P]roject files")      -- Was <leader>ff
-  nmap("<leader>sa", function() fzf.files() end, "[S]earch [A]ll files")              -- Was <leader>faf
-  nmap("<leader>sg", function() fzf.live_grep() end, "[S]earch by [G]rep")            -- Was <leader>fg
-  nmap("<leader>sw", function() fzf.grep_cword() end, "[S]earch [W]ord under cursor") -- Was <leader>fw
+  nmap("<leader>fp", function() fzf.git_files() end, "[F]ind [P]roject files")      -- Was <leader>ff
+  nmap("<leader>fa", function() fzf.files() end, "[F]ind [A]ll files")              -- Was <leader>faf
+  nmap("<leader>fg", function() fzf.live_grep() end, "[F]ind by [G]rep")            -- Was <leader>fg
+  nmap("<leader>fw", function() fzf.grep_cword() end, "[F]ind [W]ord under cursor") -- Was <leader>fw
 
   -- Buffer-specific searches
-  nmap("<leader>sb", function() fzf.buffers() end, "[S]earch [B]uffers") -- Was <leader>fb
-  nmap("<leader>sl", function()
+  nmap("<leader>fb", function() fzf.buffers() end, "[F]ind [B]uffers") -- Was <leader>fb
+  nmap("<leader>fl", function()
     fzf.blines({
       winopts = { height = 0.33, width = 0.95, row = 0.99 }
     })
-  end, "[S]earch [L]ines in buffer") -- Was <leader>fib
+  end, "[F]ind [L]ines in buffer") -- Was <leader>fib
 
   -- Diagnostic searches
-  nmap("<leader>sd", function() fzf.diagnostics() end, "[S]earch [D]iagnostics") -- Was <leader>fd
+  nmap("<leader>fd", function() fzf.diagnostics() end, "[F]ind [D]iagnostics") -- Was <leader>fd
 
   -- Resume last search
-  nmap("<leader>sr", function() fzf.resume() end, "[S]earch [R]esume") -- Was <leader>fr
+  nmap("<leader>fr", function() fzf.resume() end, "[F]ind [R]esume") -- Was <leader>fr
 
   -- Git history exploration
   nmap("<leader>gh", function() fzf.git_commits() end, "[G]it [H]istory")
@@ -280,12 +280,12 @@ local on_attach = function(_, bufnr)
   nmap("<leader>/", function() fzf.search_history() end, "Search History")
 
   -- Keymaps
-  nmap("<leader>sk", function()
+  nmap("<leader>fk", function()
     fzf.keymaps({
       winopts = { height = 0.75, width = 0.75 },
       show_details = true -- Shows mode, buffer-local status etc
     })
-  end, "[S]earch [K]eymaps")
+  end, "[F]ind [K]eymaps")
 end
 
 local servers = {
