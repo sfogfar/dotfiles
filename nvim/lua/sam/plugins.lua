@@ -49,11 +49,7 @@ require("lazy").setup({
     opts = {}
   },
 
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000
-  },
+  { "miikanissi/modus-themes.nvim", priority = 1000 },
 
   -- statusline
   {
@@ -112,7 +108,7 @@ require("lazy").setup({
   },
 
   -- commenting
-  { "numToStr/Comment.nvim",     opts = {} }, -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim", opts = {} },     -- "gc" to comment visual regions/lines
 
   -- git
   {
@@ -129,7 +125,7 @@ require("lazy").setup({
   -- language specific support
   {
     "Olical/conjure",
-    ft = { "clojure", "fennel", "scheme" },
+    ft = { "clojure", "fennel", "scheme", "python" },
     dependencies = {
       {
         "PaterJason/cmp-conjure",

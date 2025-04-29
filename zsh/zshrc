@@ -16,6 +16,9 @@ bindkey '^X^E' edit-command-line
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
+
+export FZF_DEFAULT_OPTS="--preview 'bat --style=numbers --color=always {}' --preview-window 'right:60%'"
+
 # }}}
 
 # Aliases {{{
@@ -38,7 +41,7 @@ alias dots='cd ~/dotfiles'
 
 # Quick edits
 alias zshconfig="$EDITOR ~/.zshrc"
-alias nviminit="$EDITOR ~/nvim/init.lua"
+alias nviminit="$EDITOR ~/.config/nvim/init.lua"
 alias reload="source ~/.zshrc"
 # }}}
 
@@ -85,6 +88,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export VOLTA_FEATURE_PNPM=1
 # }}}
 
 # Prompt {{{

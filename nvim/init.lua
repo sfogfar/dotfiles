@@ -81,6 +81,13 @@ vim.opt.swapfile = false
 vim.opt.writebackup = false
 vim.opt.undofile = true
 
+-- folding
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevel = 1   -- Only fold top-level by default
+vim.opt.foldnestmax = 1 -- Limit nesting to 1 level
+
 -- }}}
 
 -- keymaps {{{
@@ -196,7 +203,12 @@ require "sam.plugins"
 
 -- vim.cmd [[colorscheme tokyonight-storm]]
 -- vim.cmd[[colorscheme tokyonight-day]]
-vim.cmd.colorscheme "catppuccin-latte"
+-- vim.cmd.colorscheme "catppuccin-latte"
+vim.cmd.colorscheme "modus"
+
+require("modus-themes").setup({
+	variant = "tinted",
+})
 
 -- }}}
 
@@ -290,15 +302,24 @@ local on_attach = function(_, bufnr)
 end
 
 local servers = {
+  -- Clojure
   clojure_lsp = {},
+  -- Lua
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
+  -- Python
+  pyright = {},
+  -- Rust
+  rust_analyzer = {},
+  -- TypeScript
   ts_ls = {},
   eslint = {},
+  -- Zig 
+  zls = {},
 }
 
 -- Setup neovim lua configuration
@@ -409,18 +430,21 @@ end
 
 treesitter_configs.setup({
   ensure_installed = {
+    "clojure",
     "css",
     "fish",
     "haskell",
     "html",
+    "go",
     "javascript",
     "json",
     "lua",
+    "python",
+    "rust",
+    "scala",
     "tsx",
     "typescript",
-    "scala",
-    "clojure",
-    "go"
+    "zig",
   },
   sync_install = false,
   auto_install = true,
@@ -435,7 +459,8 @@ treesitter_configs.setup({
     disable = {},
     extended_mode = true,
     max_file_lines = nil,
-  }
+  },
+  modules = {}
 })
 
 -- }}}
@@ -594,11 +619,9 @@ end
 local prose_group = vim.api.nvim_create_augroup("ProseMode", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = prose_group,
-  pattern = { "markdown", "text" },
+  pattern = { "text" },
   callback = M.setup_prose_mode,
 })
-
--- Optionally, add a command to manually toggle pro
 
 -- }}}
 

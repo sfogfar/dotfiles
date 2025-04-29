@@ -64,8 +64,8 @@ by running `sudo apt install g++`.
 
 ### ZSH
 
-1. `ln -s ~/dotfiles/zsh/.zshenv ~/.zshenv`
-2. `ln -s ~/dotfiles/zsh/.zshrc ~/.zshrc`
+1. `ln -s ~/dotfiles/zsh/zshenv ~/.zshenv`
+2. `ln -s ~/dotfiles/zsh/zshrc ~/.zshrc`
 
 ### Fish
 
@@ -88,6 +88,7 @@ by running `sudo apt install g++`.
 
 #### MacOS
 5. `brew install ripgrep fd bat tree`
+6. `ln -s ~/dotfiles/bat ~/.config/`
 
 #### Linux
 5. Install [ripgrep](https://github.com/BurntSushi/ripgrep#installation).
