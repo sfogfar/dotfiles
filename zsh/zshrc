@@ -35,13 +35,10 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 # Navigation
-alias g='git'
 alias rps='cd ~/repos'
 alias dots='cd ~/dotfiles'
 
 # Quick edits
-alias zshconfig="$EDITOR ~/.zshrc"
-alias nviminit="$EDITOR ~/.config/nvim/init.lua"
 alias reload="source ~/.zshrc"
 # }}}
 
