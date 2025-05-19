@@ -201,12 +201,9 @@ require "sam.plugins"
 
 -- colorscheme {{{
 
--- vim.cmd [[colorscheme tokyonight-storm]]
--- vim.cmd[[colorscheme tokyonight-day]]
--- vim.cmd.colorscheme "catppuccin-latte"
-vim.cmd.colorscheme "modus"
-
+vim.cmd([[colorscheme modus]])
 require("modus-themes").setup({
+	style = "modus_operandi",
 	variant = "tinted",
 })
 

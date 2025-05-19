@@ -42,27 +42,13 @@ require("lazy").setup({
   },
 
   -- colorscheme
-  {
-    "folke/tokyonight.nvim",
-    lazy = false,
-    priority = 1000,
-    opts = {}
-  },
-
   { "miikanissi/modus-themes.nvim", priority = 1000 },
 
   -- statusline
-  {
-    "nvim-lualine/lualine.nvim",
-    opts = {
-      options = {
-        icons_enabled = false,
-        theme = "catppuccin",
-        component_separators = "|",
-        section_separators = "",
-      },
-    },
-  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   opts = {},
+  -- },
 
   -- fuzzy finding
   {
@@ -108,7 +94,7 @@ require("lazy").setup({
   },
 
   -- commenting
-  { "numToStr/Comment.nvim", opts = {} },     -- "gc" to comment visual regions/lines
+  { "numToStr/Comment.nvim", opts = {} }, -- "gc" to comment visual regions/lines
 
   -- git
   {
@@ -116,8 +102,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/plenary.nvim",  -- required
       "sindrets/diffview.nvim", -- optional - Diff integration
-
-      "nvim-telescope/telescope.nvim",
+      "ibhagwan/fzf-lua",
     },
     config = true
   },
